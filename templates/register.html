@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+{% block title %}registrarse{% endblock %}
+{% block content %}
+<div class="iniciar_session"> 
+    <div class="register">
+        <br>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+        {% endif %}
+    {% endwith %}
+        <h1>Registrarse</h1>
+        <form action="/register" method="post">
+            <form>
+                <div class="mb-3" class="username">
+                <label for="exampleInputEmail1" class="form-label">Nombre de usuario</label>
+                <br>
+                <input class="config" name="usuario" type="text" placeholder="Nombre">
+                </div>
+
+                <div class="mb-3" class="password">
+                    <label for="exampleInputPassword1" class="form-label">Introduzca contraseña</label>
+                    <br>
+                    <input class="config" name="password" type="password" placeholder="contraseña">
+                </div>
+
+                <div class="mb-3" class="password">
+                    <label for="exampleInputPassword1" class="form-label">Confirmar contraseña</label>
+                    <br>
+                    <input class="config" name="confirmar" type="password"  placeholder="contraseña">
+                </div>
+
+                <div class="espaciado">
+                    <input type="submit" value="Registrarse">
+                </div>
+
+                <div class="registro">
+                    <h6>Ya tengo cuenta <a href="/login">iniciar sesion</a></h6>
+                </div>
+            </form>
+        </form>
+</div>
+{% endblock %}

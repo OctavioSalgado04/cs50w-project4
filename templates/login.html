@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+{% block title %}iniciar sesion{% endblock %}
+{% block content %}
+<div class="iniciar_session">
+    <div class="login">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <br><br>
+        <form action="/login" method="post">
+            <form>
+                <div class="mb-3" class="username">
+                <label for="exampleInputEmail1" class="form-label">Nombre de usuario</label>
+                <br>
+                <input class="config" name="usuario" type="text" placeholder="Nombre">
+                </div>
+
+                <div class="mb-3" class="password">
+                    <label for="exampleInputPassword1" class="form-label">contraseña</label>
+                    <br>
+                    <input class="config" name="password" type="password" placeholder="contraseña">
+                </div>
+
+                <div class="espaciado">
+                    <input type="submit" value="iniciar">
+                </div>
+
+                <div class="registro">
+                    <h6>No tengo cuenta <a href="/register">registrarme</a></h6>
+                </div>
+            </form>
+        </form>
+</div>
+</div>
+{% endblock %}
