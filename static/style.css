@@ -1,5 +1,5 @@
-body {
-  background-color: aqua;
+.body {
+  background-color: rgb(255, 230, 0);
 }
 
 .iniciar_session {
@@ -22,7 +22,7 @@ body {
 }
 
 .login {
-  background-color: #f0b798;
+  background-color: #3376ce;
   border: 2px outset black;
   border-radius: 8px;
   position: absolute;
@@ -81,7 +81,7 @@ input[type=submit] :hover {
 }
 
 .register {
-  background-color: #f0b798;
+  background-color: #3376ce;
   border: 2px outset black;
   border-radius: 8px;
   position: absolute;

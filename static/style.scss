@@ -18,8 +18,8 @@ $letras: 2px 0 0 #000,
 }
 $border:2px outset #7c7c7c;
 
-body{
-    background-color: aqua;
+.body{
+    background-color: rgb(255, 230, 0);
 }
 
 .iniciar_session{
@@ -40,7 +40,7 @@ body{
     outline: none;
 }
 .login{
-    background-color: #f0b798;
+    background-color: #3376ce;
     border: 2px outset $color;
     border-radius: 8px;
     position: absolute;
@@ -100,7 +100,7 @@ a:hover{
 
 }
 .register{
-    background-color: #f0b798;
+    background-color: #3376ce;
     border: 2px outset $color;
     border-radius: 8px;
     position: absolute;
