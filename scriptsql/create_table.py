@@ -10,13 +10,23 @@ engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
 
 def main():
+    
     tabla1=text("""CREATE TABLE usuario (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
-    password TEXT NOT NULL
+    password TEXT NOT NULL,
+    admin INT NOT NULL
     );   
     """)
     db.execute(tabla1)
+
+    tabla2=text("""CREATE TABLE componentes (
+    id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    serie INT NOT NULL
+    );   
+    """)
+    db.execute(tabla2)
 
     db.commit()
 

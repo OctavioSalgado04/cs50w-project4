@@ -10,12 +10,16 @@ engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
 
 def main():
-    name="octavio"
+    name="admin"
     password="admin"
-
-    dato1=text("INSERT INTO usuario (name, password) VALUES (:name, :password)")
+  
+    dato1=text("INSERT INTO usuario (name, password, admin) VALUES (:name, :password, :admin)")
     db.execute(dato1,
-               {"name": name, "password": password })
+               {"name": name, "password": password, "admin": 1 })
+
+    componentes=text("INSERT INTO componentes (name, serie) VALUES (:name, :password,)")
+    db.execute(componentes,
+                {"name": name, "serie":serie})
 
     db.commit()
 
