@@ -1,4 +1,9 @@
 $color: black;
+%margen{
+    margin-top: 0.1em;
+    background-color: white;
+    margin-bottom: 0.1em;
+}
 $letras: 2px 0 0 #000,
 -2px 0 0 #000,
 0 2px 0 #000,
@@ -133,4 +138,10 @@ a:hover{
 }
 .espaciado{
     margin-top: 2%;
+}
+.info{
+    @extend %margen    
+}
+.carrusel{
+    @extend %margen
 }

@@ -20,14 +20,23 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Home</a>
+                <a class="nav-link active" aria-current="page" href="/inicio">Home</a>
               </li>
+              {% if user_id %}
               <li class="nav-item">
                 <a class="nav-link" href="/login">iniciar sesion</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/register">registrarme</a>
               </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="#">carrito</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout">cerrar sesion</a>
+              </li>
+              {% endif %}
             </ul>
             <form class="d-flex" role="search">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -41,7 +50,8 @@
     {% block content %}
     
     {% endblock %}
-
+      
+<script src="/static/inicio.js"></script>   
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
     </body>
