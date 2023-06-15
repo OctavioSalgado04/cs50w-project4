@@ -28,6 +28,7 @@ $border:2px outset #7c7c7c;
 }
 
 .iniciar_session{
+    background-color:aquamarine;
     background-size: cover;
     background-repeat: no-repeat;
     margin: 0;
@@ -105,6 +106,7 @@ a:hover{
 
 }
 .register{
+    margin-top: 3.5em;
     background-color: #3376ce;
     border: 2px outset $color;
     border-radius: 8px;
@@ -140,7 +142,8 @@ a:hover{
     margin-top: 2%;
 }
 .info{
-    @extend %margen    
+    @extend %margen 
+       
 }
 .carrusel{
     @extend %margen

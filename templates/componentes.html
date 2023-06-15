@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
-{% block title %}inicio{% endblock %}
+{% block title %}componentes{% endblock %}
 {% block content %}
-<p>hola mundo xd </p>
+
 <h1>reguladores de voltajes</h1>
 <img src="/static/image/lm78xx.png">
 <form action="#">
@@ -15,5 +15,7 @@
       <option value="12">12</option>
     </select>
 </form>
+{% if session.user_id %}
 <button>enviar al carrito</button>
+{% endif %}
 {% endblock %}

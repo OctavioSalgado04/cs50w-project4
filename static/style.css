@@ -9,6 +9,7 @@
 }
 
 .iniciar_session {
+  background-color: aquamarine;
   background-size: cover;
   background-repeat: no-repeat;
   margin: 0;
@@ -87,6 +88,7 @@ input[type=submit] :hover {
 }
 
 .register {
+  margin-top: 3.5em;
   background-color: #3376ce;
   border: 2px outset black;
   border-radius: 8px;

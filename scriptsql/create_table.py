@@ -22,8 +22,10 @@ def main():
 
     tabla2=text("""CREATE TABLE componentes (
     id SERIAL PRIMARY KEY,
+    tipo TEXT NOT NULL,
     name TEXT NOT NULL,
-    serie INT NOT NULL
+    precio TEXT NOT NULL,
+    cantidad INT DEFAULT 50
     );   
     """)
     db.execute(tabla2)

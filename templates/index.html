@@ -5,6 +5,257 @@
     <h1>carrrusel</h1>
 </div> -->
 <div class="info">
-    <p>bienvenido a mi pagina web </p>
+    <form action="#">
+        <select class="form-select" aria-label="Default select example">
+            <option selected disabled>que va allevar?</option>
+            <option value="1">arduino</option>
+            <option value="2">componentes</option>
+            <option value="3">dispositivos</option>
+        </select>
+    </form>
+    <div class="container text-center">
+        <div class="row row-cols-4">
+          <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="/static/image/lm78xx.png" class="card-img-top">
+                    <div class="card-body">
+                    <h6 class="card-title">reguladores de voltajes fijos</h6>
+                    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                    </div>
+                    <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <form action="#">
+                            <select name="lenguajes" id="lang">
+                            <option value="" selected disabled>lm78xx</option>
+                            {% for i in name %}
+                            <option value="05">{{i[0]}}</option>
+                            {% endfor %}
+                            </select>
+                        </form>
+                    </li>
+                    <li class="list-group-item">
+                        <p>precio:{{precio[0]}}</p>
+                    </li>
+                    {% if session.user_id %}
+                    <li class="list-group-item">
+                        <button>enviar al carrito</button>
+                    </li>
+                    {% endif %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="/static/image/OIP.jpeg" class="card-img-top">
+                    <div class="card-body">
+                    <h6 class="card-title">temporizadores IC</h6>
+                    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                    </div>
+                    <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <form action="#">
+                            <select name="lenguajes" id="lang">
+                            <option value="" selected disabled>ltxxx</option>
+                            {% for i in name3 %}
+                            <option value="05">{{i[0]}}</option>
+                            {% endfor %}
+                            </select>
+                        </form>
+                    </li>
+                    <li class="list-group-item">
+                        <p>precio:{{precio3[0]}}</p>
+                    </li>
+                    {% if session.user_id %}
+                    <li class="list-group-item">
+                        <button>enviar al carrito</button>
+                    </li>
+                    {% endif %}
+                    </ul>
+                </div>
+            </div>
+          <div class="col">
+            <div class="card" style="width: 18rem;">
+                <img src="/static/image/lm3xxx.jpg" class="card-img-top">
+                <div class="card-body">
+                <h6 class="card-title">amplificador operacional</h6>
+                <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                </div>
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <form action="#">
+                        <select name="lenguajes" id="lang">
+                        <option value="" selected disabled>lm3xxx</option>
+                        {% for i in name2 %}
+                        <option value="05">{{i[0]}}</option>
+                        {% endfor %}
+                        </select>
+                    </form>
+                </li>
+                <li class="list-group-item">
+                    <p>precio:{{precio2[0]}}</p>
+                </li>
+                {% if session.user_id %}
+                <li class="list-group-item">
+                    <button>enviar al carrito</button>
+                </li>
+                {% endif %}
+                </ul>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card" style="width: 18rem;">
+                <img src="/static/image/R.jpeg" class="card-img-top">
+                <div class="card-body">
+                <h6 class="card-title">regulador de voltaje ajustable</h6>
+                <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                </div>
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <form action="#">
+                        <select name="lenguajes" id="lang">
+                        <option value="" selected disabled>lm3xx</option>
+                        {% for i in name4 %}
+                        <option value="05">{{i[0]}}</option>
+                        {% endfor %}
+                        </select>
+                    </form>
+                </li>
+                <li class="list-group-item">
+                    <p>precio:{{precio4[0]}}</p>
+                </li>
+                {% if session.user_id %}
+                <li class="list-group-item">
+                    <button>enviar al carrito</button>
+                </li>
+                {% endif %}
+                </ul>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div>
+        nosi
+    </div>
+    <div class="container text-center">
+        <div class="row row-cols-4">
+          <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="/static/image/R (1).jpeg" class="card-img-top">
+                    <div class="card-body">
+                    <h6 class="card-title">amplificador de audio de bajo voltaje</h6>
+                    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                    </div>
+                    <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <form action="#">
+                            <select name="lenguajes" id="lang">
+                            <option value="" selected disabled>lm3xxx</option>
+                            {% for i in name5 %}
+                            <option value="05">{{i[0]}}</option>
+                            {% endfor %}
+                            </select>
+                        </form>
+                    </li>
+                    <li class="list-group-item">
+                        <p>precio:{{precio5[0]}}</p>
+                    </li>
+                    {% if session.user_id %}
+                    <li class="list-group-item">
+                        <button>enviar al carrito</button>
+                    </li>
+                    {% endif %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="/static/image/R (2).jpeg" class="card-img-top">
+                    <div class="card-body">
+                    <h6 class="card-title">resistencias</h6>
+                    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                    </div>
+                    <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <form action="#">
+                            <select name="lenguajes" id="lang">
+                            <option value="" selected disabled>cuatro bandas</option>
+                            {% for i in name6 %}
+                            <option value="05">{{i[0]}}</option>
+                            {% endfor %}
+                            </select>
+                        </form>
+                    </li>
+                    <li class="list-group-item">
+                        <p>precio:{{precio6[0]}}</p>
+                    </li>
+                    {% if session.user_id %}
+                    <li class="list-group-item">
+                        <button>enviar al carrito</button>
+                    </li>
+                    {% endif %}
+                    </ul>
+                </div>
+            </div>
+          <div class="col">
+            <div class="card" style="width: 18rem;">
+                <img src="/static/image/trans.png" class="card-img-top">
+                <div class="card-body">
+                <h6 class="card-title">transistor bipolar PNP</h6>
+                <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                </div>
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <form action="#">
+                        <select name="lenguajes" id="lang">
+                        <option value="" selected disabled>2nxxx</option>
+                        {% for i in name7 %}
+                        <option value="05">{{i[0]}}</option>
+                        {% endfor %}
+                        </select>
+                    </form>
+                </li>
+                <li class="list-group-item">
+                    <p>precio:{{precio7[0]}}</p>
+                </li>
+                {% if session.user_id %}
+                <li class="list-group-item">
+                    <button>enviar al carrito</button>
+                </li>
+                {% endif %}
+                </ul>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card" style="width: 18rem;">
+                <img src="/static/image/fet.jpeg" class="card-img-top">
+                <div class="card-body">
+                <h6 class="card-title">(FET)transistores de efecto de campo</h6>
+                <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                </div>
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <form action="#">
+                        <select name="lenguajes" id="lang">
+                        <option value="" selected disabled>jxxx</option>
+                        {% for i in name8 %}
+                        <option value="05">{{i[0]}}</option>
+                        {% endfor %}
+                        </select>
+                    </form>
+                </li>
+                <li class="list-group-item">
+                    <p>precio:{{precio8[0]}}</p>
+                </li>
+                {% if session.user_id %}
+                <li class="list-group-item">
+                    <button>enviar al carrito</button>
+                </li>
+                {% endif %}
+                </ul>
+            </div>
+          </div>
+        </div>
+    </div>
+
 </div>
 {% endblock %}
