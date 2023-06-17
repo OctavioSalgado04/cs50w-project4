@@ -11,7 +11,7 @@ db = scoped_session(sessionmaker(bind=engine))
 
 def main():
   
-    dato1=text("DROP TABLE componentes")
+    dato1=text("DROP TABLE producto")
     db.execute(dato1)
 
     db.commit()

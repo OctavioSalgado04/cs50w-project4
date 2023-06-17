@@ -16,6 +16,7 @@ def main():
     dato1=text("INSERT INTO usuario (name, password, admin) VALUES (:name, :password, :admin)")
     db.execute(dato1,
                {"name": name, "password": password, "admin": 1 })
+               
 
     db.commit()
 

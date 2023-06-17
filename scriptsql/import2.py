@@ -13,20 +13,20 @@ db = scoped_session(sessionmaker(bind=engine))
 def read_file(filename, col_list):
     with open(filename, 'r') as f:
         reader = csv.DictReader(f)
-
-        dato=text("SELECT id from categoria WHERE nombre='componentes'")
-        id_categoria=db.execute(dato)
+        dato=text("SELECT id FROM categoria WHERE nombre='arduino'")
+        id_categoria=db.execute(dato).fetchone()
+        print(id_categoria)
         db.commit()
  
         for row in reader:    
-            dato1=text("INSERT INTO componentes (tipo, name, precio) VALUES (:tipo, :name, :precio)")
+            dato1=text("INSERT INTO producto (id_categoria, nombre, precio, cantidad, imagen) VALUES (:id_categoria, :nombre, :precio, :cantidad, :imagen)")
             db.execute(dato1,
-                    {"tipo": row["tipo"], "name": row["name"], "precio":row["precio"]})
+                    {"id_categoria": id_categoria[0], "nombre": row["name"], "precio":row["precio"], "cantidad": 50,"imagen": row["foto"]})
             db.commit()
                     
 
 def main():
-    read_file('componentes.csv', ['tipo', 'name', 'precio'])
+    read_file('arduino.csv', ['foto', 'name', 'precio'])
     
     
 
