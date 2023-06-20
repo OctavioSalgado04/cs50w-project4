@@ -6,6 +6,7 @@ from sqlalchemy import create_engine, text
 from sqlalchemy.orm import scoped_session, sessionmaker
 from dotenv import load_dotenv
 from helper import login_required
+import datetime
 
 app = Flask(__name__)
 
@@ -19,50 +20,13 @@ Session(app)
 engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
 
+formato_hora = datetime.datetime.now()
+hora = formato_hora.strftime("el %d-%m-%Y a las %H:%M:%S")
+print(hora)
 
 @app.route("/")
 def index():
-    #regulador de voltaje fijo
-    dato1=text("SELECT name FROM componentes where tipo='regulador de voltaje fijo'")
-    name=db.execute(dato1).fetchall()
-    dato2=text("SELECT precio FROM componentes where tipo='regulador de voltaje fijo'")
-    precio=db.execute(dato2).fetchone()
-    #amplificador operacional
-    dat1=text("SELECT name FROM componentes where tipo='amplificador operacional'")
-    name2=db.execute(dat1).fetchall()
-    dat2=text("SELECT precio FROM componentes where tipo='amplificador operacional'")
-    precio2=db.execute(dat2).fetchone()
-    #temporizador ic
-    dat01=text("SELECT name FROM componentes where tipo='temporizador IC'")
-    name3=db.execute(dat01).fetchall()
-    dat02=text("SELECT precio FROM componentes where tipo='temporizador IC'")
-    precio3=db.execute(dat02).fetchone()
-    #regulador de voltaje ajustable
-    dataso1=text("SELECT name FROM componentes where tipo='regulador de voltaje ajustable'")
-    name4=db.execute(dataso1).fetchall()
-    dataso2=text("SELECT precio FROM componentes where tipo='regulador de voltaje ajustable'")
-    precio4=db.execute(dataso2).fetchone()
-    #amplificador de audio de bajo voltaje
-    datas1=text("SELECT name FROM componentes where tipo='regulador de voltaje ajustable'")
-    name5=db.execute(datas1).fetchall()
-    datas2=text("SELECT precio FROM componentes where tipo='regulador de voltaje ajustable'")
-    precio5=db.execute(datas2).fetchone()
-    #resistencias
-    datas01=text("SELECT name FROM componentes where tipo='resistencias'")
-    name6=db.execute(datas01).fetchall()
-    datas02=text("SELECT precio FROM componentes where tipo='resistencias'")
-    precio6=db.execute(datas02).fetchone()
-    #transistores pnp bipolar
-    trnas1=text("SELECT name FROM componentes where tipo='PNP transistores bipolares'")
-    name7=db.execute(trnas1).fetchall()
-    trnas2=text("SELECT precio FROM componentes where tipo='PNP transistores bipolares'")
-    precio7=db.execute(trnas2).fetchone()
-    #(FET)transistores de efecto de campo
-    trans1=text("SELECT name FROM componentes where tipo='(FET)transistores de efecto de campo'")
-    name8=db.execute(trans1).fetchall()
-    trans2=text("SELECT precio FROM componentes where tipo='(FET)transistores de efecto de campo'")
-    precio8=db.execute(trans2).fetchone()
-    return render_template("index.html", name=name, precio=precio,name2=name2, precio2=precio2,name3=name3, precio3=precio3,name4=name4, precio4=precio4,name5=name5, precio5=precio5,name6=name6, precio6=precio6, name7=name7, precio7=precio7, name8=name8, precio8=precio8)
+        return render_template("index.html")
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
@@ -87,6 +51,7 @@ def login():
             return render_template('login.html')
         session["user_id"]= existe[0]
 
+        flash(f"bienvenido {name}")
         return redirect("/")
     else:
         return render_template('login.html')
@@ -126,6 +91,7 @@ def register():
             dato2 = text("SELECT * FROM usuario WHERE name = :usuario")
             row = db.execute(dato2,{"usuario":usuario}).fetchone()
             session["user_id"] = row[0]
+            flash(f"ya ha sido registrado como {usuario}")
             return redirect("/")
 
         if consulta[1] == usuario:
@@ -141,22 +107,112 @@ def logout():
     session.clear()
     return redirect("/login")
 
-@app.route("/inicio")
-@login_required
-def inicio():
-    componentes=1
-    print(session["user_id"])
-    return render_template("inicio.html")
 
 @app.route("/componentes")
 def componentes():
-    return render_template("componentes.html")
+
+    #tipo
+    dato = text("SELECT producto.nombre, tipo_componente.nombre FROM producto INNER JOIN tipo_componente ON CAST(producto.id AS TEXT) = tipo_componente.id_producto")
+    runaway=db.execute(dato)
+    circles=runaway.fetchall()
+    #print(circles)
+
+    #precio
+    precio=[]
+    nombre=['regulador de voltaje fijo', 'amplificador operacional', 'temporizador IC', 'regulador de voltaje ajustable', 'amplificador de audio de bajo voltaje', 'resistencias', 'PNP transistores bipolares', '(FET)transistores de efecto de campo', 'transistores darlington', '(BJT)transistores de potencias bipolares', '(JFET)transistores de union de campo', 'MOSFET de potencia']
+    for k in(nombre):
+        dato2=text("SELECT precio FROM producto WHERE nombre= :nombre")
+        precios=db.execute(dato2,
+                            {"nombre":k}).fetchone()
+        precio.append(precios[0])
+
+    return render_template("componentes.html", name=circles, precio=precio)
+
 
 @app.route("/dispositivos")
 def dispositivos():
-    return render_template("dispositivos.html")
+    #dispositivos
+    dato1=text("SELECT imagen FROM producto WHERE id_categoria = '3'")
+    imagen=db.execute(dato1).fetchall()
+
+    #precios
+    dato2=text("SELECT precio FROM producto WHERE id_categoria = '3'")
+    precio=db.execute(dato2).fetchall()
+
+    return render_template("dispositivos.html", imagen=imagen, precio=precio)
 
 
 @app.route("/arduino")
 def arduino():
-    return render_template("arduino.html")
+    #arduinos
+    dato1=text("SELECT imagen FROM producto WHERE id_categoria = '1'")
+    imagen=db.execute(dato1).fetchall()
+    
+    #precios
+    dato2=text("SELECT precio FROM producto WHERE id_categoria = '1'")
+    precio=db.execute(dato2).fetchall()
+    
+    return render_template("arduino.html",imagen=imagen, precio=precio)
+
+
+@app.route('/comprar', methods=['POST'])
+def comprar():
+    producto = request.form.get('producto')
+    precio = request.form.get('precio')
+    nombre = request.form.get('name')
+    print(nombre)
+    dato1=text("SELECT cantidad FROM producto WHERE nombre=:nombre")
+    stock=db.execute(dato1,
+                    {"nombre":nombre}).fetchone()
+    print(stock)
+
+
+    return render_template('comprar.html', producto=producto, precio=precio, nombre=nombre, stock=stock[0])
+
+@app.route("/venta")
+def venta():
+    subtotal=""
+    impuesto=0.05
+    descuento=""
+    total= subtotal*impuesto+descuento 
+    fecha_venta= hora
+    
+    dato1=text("INSERT INTO venta (id_usuario, subtotal, impuesto, total, descuento, fecha_venta) VALUES (:id, :subtotal, :impuesto, :total, :descuento, :fecha_venta)")
+    db.execute(dato1,
+               {"id": session["user_id"], "subtotal": subtotal, "impuesto": impuesto,"total":total, "descuento":descuento, "fecha_venta":fecha_venta})
+
+    db.commit()
+
+@app.route("/detalle_venta")
+def detalle_venta():
+    nombre=""
+    cantidad=""
+    precio_unitario=""
+    monto_total=cantidad*precio_unitario
+
+    si=text("SELECT id FROM producto WHERE nombre= :nombre")
+    id_producto=db.execute(si,
+                        {"nombre":nombre}).fetchone()
+
+    venta=text("SELECT id FROM venta WHERE id_usuario=:user")
+    id_venta=db.execute(venta,
+                        {"user":session["user_id"]}).fetchone()
+
+    dato1=text("INSERT INTO detalle_venta (id_producto, id_venta, cantidad, precio_unitario, monto_total) VALUES (:id_producto, :id_venta, :cantidad, :precio_unitario, :monto_total)")
+    db.execute(dato1,
+                {"id_producto":id_producto, "id_venta":id_venta, "cantidad":cantidad, "precio_unitario":precio_unitario, "monto_total":monto_total})
+
+    db.commit()
+
+    @app.route("/historial")
+    def detalle_venta():
+        producto=''
+        dato1=text("SELECT FROM id_venta FROM detalle_venta WHERE id_producto=:producto ")
+        id_venta=db.execute(dato1,
+                            {"producto":producto}).fetchone()
+        id_usurio=session["user_id"]
+        fecha= hora
+
+        dato1=text("INSERT INTO historial (id_venta, id_venta, id_usuario, fecha_historial) VALUES (:id_venta, :id_usuario, :fecha_historial)")
+        db.execute(dato1,
+                    {"id_venta":id_venta, ":id_usuario":id_usuario, "fecha_historial":fecha})

@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% block title %}compra{% endblock %}
+{% block content %}
+<div class="info">
+    <h2>Detalles de la compra:</h2>
+    <p>nombre del producto seleccionado: {{nombre}}</p>
+    {% if not producto %}
+    <p>stock: {{ stock }}</p>
+    <p>Precio: {{ precio }}</p>
+    {% else %}
+    <p>TIPO: {{ producto }}</p>
+    <p>stock: {{ stock }}</p>
+    <p>Precio: {{ precio }}</p>
+    {% endif %}
+    
+    <div id="liveAlertPlaceholder"></div>
+    <button type="submit" class="btn btn-outline-secondary" onclick="">enviar al carrito</button>
+</div>
+{% endblock %}

@@ -142,9 +142,13 @@ a:hover{
     margin-top: 2%;
 }
 .info{
-    @extend %margen 
+    @extend %margen;
        
 }
 .carrusel{
-    @extend %margen
+    @extend %margen;
+}
+.separo{
+    @extend %letras;
+    margin-bottom: 10cm;
 }

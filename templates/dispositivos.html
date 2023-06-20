@@ -1,5 +1,99 @@
 {% extends 'layout.html' %}
 {% block title %}dispositivos{% endblock %}
 {% block content %}
-runing at the time, to make you love me 
+<select class="form-select" aria-label="Default select example" onchange="select(this.value);">
+    <option selected disabled>¿Qué va a llevar?</option>
+    <option value="/arduino">Arduino</option>
+    <option value="/componentes">Componentes</option>
+    <option value="/dispositivos">Dispositivos</option>
+  </select>
+  <div class="container text-center">
+    <div class="row g-2">
+      <div class="col-6">
+        <div class="p-3">
+          <div class="card" style="width: 18rem;">
+            <img src="{{imagen[0][0]}}" class="card-img-top"  height="185em" alt="...">
+            <div class="card-body">
+              <p class="card-text">osciloscopio digital</p>
+              <li class="list-group-item">{{precio[0][0]}}C$</li>
+              {% if session.user_id %}
+                <li class="list-group-item">
+                  <div id="liveAlertPlaceholder"></div>
+                  <form action="/comprar" method="POST">
+                    <input type="hidden" name="name" value="osciloscopio digital">
+                    <input type="hidden" name="precio" value="{{precio[0][0]}}c$">
+                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+                  </form>
+                </li>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="p-3">
+          <div class="card" style="width: 18rem;">
+            <img src="{{imagen[1][0]}}" class="card-img-top"  height="185em" alt="...">
+            <div class="card-body">
+              <p class="card-text">multimetro fluke 115v</p>
+              <li class="list-group-item">{{precio[1][0]}}C$</li>
+              {% if session.user_id %}
+                <li class="list-group-item">
+                  <div id="liveAlertPlaceholder"></div>
+                  <form action="/comprar" method="POST">
+                    <input type="hidden" name="name" value="multimetro fulke 115v">
+                    <input type="hidden" name="precio" value="{{precio[1][0]}}c$">
+                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+                  </form>
+                </li>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="p-3">
+          <div class="card" style="width: 18rem;">
+            <img src="{{imagen[2][0]}}" class="card-img-top"  height="285em" alt="...">
+            <div class="card-body">
+              <p class="card-text">fuente ad y dc</p>
+              <li class="list-group-item">{{precio[2][0]}}C$</li>
+              {% if session.user_id %}
+                <li class="list-group-item">
+                  <div id="liveAlertPlaceholder"></div>
+                  <form action="/comprar" method="POST">
+                    <input type="hidden" name="name" value="fuente ad y dc">
+                    <input type="hidden" name="precio" value="{{precio[2][0]}}c$">
+                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+                  </form>
+                </li>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="p-3">
+          <div class="card" style="width: 18rem;">
+            <img src="{{imagen[3][0]}}" class="card-img-top"  height="285em" alt="...">
+            <div class="card-body">
+              <p class="card-text">analizador de espectro</p>
+              <li class="list-group-item">{{precio[3][0]}}C$</li>
+              {% if session.user_id %}
+                <li class="list-group-item">
+                  <div id="liveAlertPlaceholder"></div>
+                  <form action="/comprar" method="POST">
+                    <input type="hidden" name="name" value="analizador de espectro">
+                    <input type="hidden" name="precio" value="{{precio[3][0]}}c$">
+                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+                  </form>
+                </li>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 {% endblock %}

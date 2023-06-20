@@ -1,5 +1,286 @@
 {% extends 'layout.html' %}
 {% block title %}arduino{% endblock %}
 {% block content %}
-runing at the time, to make you love me 
+<select class="form-select" aria-label="Default select example" onchange="select(this.value);">
+    <option selected disabled>¿Qué va a llevar?</option>
+    <option value="/arduino">Arduino</option>
+    <option value="/componentes">Componentes</option>
+    <option value="/dispositivos">Dispositivos</option>
+  </select>
+
+  <div class="container text-center">
+    <div class="row g-2">
+      <div class="col-6">
+        <div class="p-3">
+          <div class="card" style="width: 18rem;">
+            <img src="{{imagen[0][0]}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <p class="card-text">arduino zero</p>
+              <li class="list-group-item">{{precio[0][0]}}C$</li>
+              {% if session.user_id %}
+                <li class="list-group-item">
+                  <div id="liveAlertPlaceholder"></div>
+                  <form action="/comprar" method="POST">
+                    <input type="hidden" name="name" value="zero">
+                    <input type="hidden" name="precio" value="{{precio[0][0]}}">
+                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+                  </form>
+                </li>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="p-3">
+          <div class="card" style="width: 18rem;">
+            <img src="{{imagen[1][0]}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <p class="card-text">arduino uno</p>
+              <li class="list-group-item">{{precio[1][0]}}C$</li>
+              {% if session.user_id %}
+                <li class="list-group-item">
+                  <div id="liveAlertPlaceholder"></div>
+                  <form action="/comprar" method="POST">
+                    <input type="hidden" name="name" value="uno">
+                    <input type="hidden" name="precio" value="{{precio[1][0]}}">
+                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+                  </form>
+                </li>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="p-3">
+          <div class="card" style="width: 18rem;">
+            <img src="{{imagen[2][0]}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <p class="card-text">arduino leonardo</p>
+              <li class="list-group-item">{{precio[2][0]}}C$</li>
+              {% if session.user_id %}
+                <li class="list-group-item">
+                  <div id="liveAlertPlaceholder"></div>
+                  <form action="/comprar" method="POST">
+                    <input type="hidden" name="name" value="leonardo">
+                    <input type="hidden" name="precio" value="{{precio[2][0]}}">
+                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+                  </form>
+                </li>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="p-3">
+          <div class="card" style="width: 18rem;">
+            <img src="{{imagen[3][0]}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <p class="card-text">arduino ethernet</p>
+              <li class="list-group-item">{{precio[3][0]}}C$</li>
+              {% if session.user_id %}
+                <li class="list-group-item">
+                  <div id="liveAlertPlaceholder"></div>
+                  <form action="/comprar" method="POST">
+                    <input type="hidden" name="name" value="ethernet">
+                    <input type="hidden" name="precio" value="{{precio[3][0]}}">
+                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+                  </form>
+                </li>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <div class="container text-center">
+    <div class="row g-2">
+      <div class="col-6">
+        <div class="p-3">
+          <div class="card" style="width: 18rem;">
+            <img src="{{imagen[4][0]}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <p class="card-text">arduino pro</p>
+              <li class="list-group-item">{{precio[4][0]}}C$</li>
+              {% if session.user_id %}
+                <li class="list-group-item">
+                  <div id="liveAlertPlaceholder"></div>
+                  <form action="/comprar" method="POST">
+                    <input type="hidden" name="name" value="arduino pro">
+                    <input type="hidden" name="precio" value="{{precio[4][0]}}">
+                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+                  </form>
+                </li>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="p-3">
+          <div class="card" style="width: 18rem;">
+            <img src="{{imagen[5][0]}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <p class="card-text">arduino due</p>
+              <li class="list-group-item">{{precio[5][0]}}C$</li>
+              {% if session.user_id %}
+                <li class="list-group-item">
+                  <div id="liveAlertPlaceholder"></div>
+                  <form action="/comprar" method="POST">
+                    <input type="hidden" name="name" value="due">
+                    <input type="hidden" name="precio" value="{{precio[5][0]}}">
+                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+                  </form>
+                </li>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="p-3">
+          <div class="card" style="width: 18rem;">
+            <img src="{{imagen[6][0]}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <p class="card-text">arduino mega</p>
+              <li class="list-group-item">{{precio[6][0]}}C$</li>
+              {% if session.user_id %}
+                <li class="list-group-item">
+                  <div id="liveAlertPlaceholder"></div>
+                  <form action="/comprar" method="POST">
+                    <input type="hidden" name="name" value="mega">
+                    <input type="hidden" name="precio" value="{{precio[6][0]}}">
+                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+                  </form>
+                </li>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="p-3">
+          <div class="card" style="width: 18rem;">
+            <img src="{{imagen[7][0]}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <p class="card-text">arduino mega rdk</p>
+              <li class="list-group-item">{{precio[7][0]}}C$</li>
+              {% if session.user_id %}
+                <li class="list-group-item">
+                  <div id="liveAlertPlaceholder"></div>
+                  <form action="/comprar" method="POST">
+                    <input type="hidden" name="name" value="mega rdk">
+                    <input type="hidden" name="precio" value="{{precio[7][0]}}">
+                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+                  </form>
+                </li>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <div class="container text-center">
+    <div class="row g-2">
+      <div class="col-6">
+        <div class="p-3">
+          <div class="card" style="width: 18rem;">
+            <img src="{{imagen[8][0]}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <p class="card-text">arduino micro</p>
+              <li class="list-group-item">{{precio[8][0]}}C$</li>
+              {% if session.user_id %}
+                <li class="list-group-item">
+                  <div id="liveAlertPlaceholder"></div>
+                  <form action="/comprar" method="POST">
+                    <input type="hidden" name="name" value="micro">
+                    <input type="hidden" name="precio" value="{{precio[8][0]}}">
+                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+                  </form>
+                </li>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="p-3">
+          <div class="card" style="width: 18rem;">
+            <img src="{{imagen[9][0]}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <p class="card-text">arduino nano</p>
+              <li class="list-group-item">{{precio[9][0]}}C$</li>
+              {% if session.user_id %}
+                <li class="list-group-item">
+                  <div id="liveAlertPlaceholder"></div>
+                  <form action="/comprar" method="POST">
+                    <input type="hidden" name="name" value="nano">
+                    <input type="hidden" name="precio" value="{{precio[9][0]}}">
+                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+                  </form>
+                </li>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="p-3">
+          <div class="card" style="width: 18rem;">
+            <img src="{{imagen[10][0]}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <p class="card-text">arduino mega</p>
+              <li class="list-group-item">{{precio[10][0]}}C$</li>
+              {% if session.user_id %}
+                <li class="list-group-item">
+                  <div id="liveAlertPlaceholder"></div>
+                  <form action="/comprar" method="POST">
+                    <input type="hidden" name="name" value="mega">
+                    <input type="hidden" name="precio" value="{{precio[10][0]}}">
+                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+                  </form>
+                </li>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="p-3">
+          <div class="card" style="width: 18rem;">
+            <img src="{{imagen[11][0]}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <p class="card-text">arduino esplora</p>
+              <li class="list-group-item">{{precio[11][0]}}C$</li>
+              {% if session.user_id %}
+                <li class="list-group-item">
+                  <div id="liveAlertPlaceholder"></div>
+                  <form action="/comprar" method="POST">
+                    <input type="hidden" name="name" value="esplora">
+                    <input type="hidden" name="precio" value="{{precio[11][0]}}">
+                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+                  </form>
+                </li>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 {% endblock %}

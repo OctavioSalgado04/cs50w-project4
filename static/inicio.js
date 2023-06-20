@@ -1,15 +1,19 @@
-// window.addEventListener('load', function() {
-//   const formulario = document.getElementById("formulario");
-//   const Usuario = localStorage.getItem("nombre");
+const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+const appendAlert = (message, type) => {
+  const wrapper = document.createElement('div')
+  wrapper.innerHTML = [
+    `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+    `   <div>${message}</div>`,
+    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+    '</div>'
+  ].join('')
 
-//   if (Usuario) {
-//     window.location.replace("/inicio");
-//   }
+  alertPlaceholder.append(wrapper)
+}
 
-//   formulario.addEventListener("submit", function(evento) {
-//     evento.preventDefault();
-//     const nombre = document.getElementById("nombre").value;
-//     localStorage.setItem("nombre", nombre);
-//     window.location.replace("/inicio");
-//   });
-// });
+function select(value) {
+  var baseUrl = window.location.href.split('/'); // Obtiene la URL base actual
+  baseUrl.pop(); // Elimina la última parte de la URL (nombre del archivo actual)
+  var newUrl = baseUrl.join('/') + value; // Concatena la URL base con el valor seleccionado
+  window.location.href = newUrl; // Redirige a la nueva URL
+}
