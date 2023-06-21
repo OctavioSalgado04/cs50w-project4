@@ -15,13 +15,13 @@
           <div class="card" style="width: 18rem;">
             <img src="{{imagen[0][0]}}" class="card-img-top" alt="...">
             <div class="card-body">
-              <p class="card-text">arduino zero</p>
+              <p class="card-text">{{imagen[0][1]}}</p>
               <li class="list-group-item">{{precio[0][0]}}C$</li>
               {% if session.user_id %}
                 <li class="list-group-item">
                   <div id="liveAlertPlaceholder"></div>
                   <form action="/comprar" method="POST">
-                    <input type="hidden" name="name" value="zero">
+                    <input type="hidden" name="name" value="imagen[0][1]">
                     <input type="hidden" name="precio" value="{{precio[0][0]}}">
                     <button type="submit" class="btn btn-outline-secondary">Comprar</button>
                   </form>
@@ -36,13 +36,13 @@
           <div class="card" style="width: 18rem;">
             <img src="{{imagen[1][0]}}" class="card-img-top" alt="...">
             <div class="card-body">
-              <p class="card-text">arduino uno</p>
+              <p class="card-text">{{imagen[1][1]}}</p>
               <li class="list-group-item">{{precio[1][0]}}C$</li>
               {% if session.user_id %}
                 <li class="list-group-item">
                   <div id="liveAlertPlaceholder"></div>
                   <form action="/comprar" method="POST">
-                    <input type="hidden" name="name" value="uno">
+                    <input type="hidden" name="name" value="{{imagen[1][1]}}">
                     <input type="hidden" name="precio" value="{{precio[1][0]}}">
                     <button type="submit" class="btn btn-outline-secondary">Comprar</button>
                   </form>
@@ -57,13 +57,13 @@
           <div class="card" style="width: 18rem;">
             <img src="{{imagen[2][0]}}" class="card-img-top" alt="...">
             <div class="card-body">
-              <p class="card-text">arduino leonardo</p>
+              <p class="card-text">{{imagen[2][1]}}</p>
               <li class="list-group-item">{{precio[2][0]}}C$</li>
               {% if session.user_id %}
                 <li class="list-group-item">
                   <div id="liveAlertPlaceholder"></div>
                   <form action="/comprar" method="POST">
-                    <input type="hidden" name="name" value="leonardo">
+                    <input type="hidden" name="name" value="imagen[2][1]">
                     <input type="hidden" name="precio" value="{{precio[2][0]}}">
                     <button type="submit" class="btn btn-outline-secondary">Comprar</button>
                   </form>
@@ -78,13 +78,13 @@
           <div class="card" style="width: 18rem;">
             <img src="{{imagen[3][0]}}" class="card-img-top" alt="...">
             <div class="card-body">
-              <p class="card-text">arduino ethernet</p>
+              <p class="card-text">{{imagen[3][1]}}</p>
               <li class="list-group-item">{{precio[3][0]}}C$</li>
               {% if session.user_id %}
                 <li class="list-group-item">
                   <div id="liveAlertPlaceholder"></div>
                   <form action="/comprar" method="POST">
-                    <input type="hidden" name="name" value="ethernet">
+                    <input type="hidden" name="name" value="{{imagen[3][1]}}">
                     <input type="hidden" name="precio" value="{{precio[3][0]}}">
                     <button type="submit" class="btn btn-outline-secondary">Comprar</button>
                   </form>
@@ -108,13 +108,13 @@
           <div class="card" style="width: 18rem;">
             <img src="{{imagen[4][0]}}" class="card-img-top" alt="...">
             <div class="card-body">
-              <p class="card-text">arduino pro</p>
+              <p class="card-text">{{imagen[4][1]}}</p>
               <li class="list-group-item">{{precio[4][0]}}C$</li>
               {% if session.user_id %}
                 <li class="list-group-item">
                   <div id="liveAlertPlaceholder"></div>
                   <form action="/comprar" method="POST">
-                    <input type="hidden" name="name" value="arduino pro">
+                    <input type="hidden" name="name" value="{{imagen[4][1]}}">
                     <input type="hidden" name="precio" value="{{precio[4][0]}}">
                     <button type="submit" class="btn btn-outline-secondary">Comprar</button>
                   </form>
@@ -129,13 +129,13 @@
           <div class="card" style="width: 18rem;">
             <img src="{{imagen[5][0]}}" class="card-img-top" alt="...">
             <div class="card-body">
-              <p class="card-text">arduino due</p>
+              <p class="card-text">{{imagen[5][1]}}</p>
               <li class="list-group-item">{{precio[5][0]}}C$</li>
               {% if session.user_id %}
                 <li class="list-group-item">
                   <div id="liveAlertPlaceholder"></div>
                   <form action="/comprar" method="POST">
-                    <input type="hidden" name="name" value="due">
+                    <input type="hidden" name="name" value="{{imagen[5][1]}}">
                     <input type="hidden" name="precio" value="{{precio[5][0]}}">
                     <button type="submit" class="btn btn-outline-secondary">Comprar</button>
                   </form>
@@ -150,13 +150,13 @@
           <div class="card" style="width: 18rem;">
             <img src="{{imagen[6][0]}}" class="card-img-top" alt="...">
             <div class="card-body">
-              <p class="card-text">arduino mega</p>
+              <p class="card-text">{{imagen[6][1]}}</p>
               <li class="list-group-item">{{precio[6][0]}}C$</li>
               {% if session.user_id %}
                 <li class="list-group-item">
                   <div id="liveAlertPlaceholder"></div>
                   <form action="/comprar" method="POST">
-                    <input type="hidden" name="name" value="mega">
+                    <input type="hidden" name="name" value="{{imagen[6][1]}}">
                     <input type="hidden" name="precio" value="{{precio[6][0]}}">
                     <button type="submit" class="btn btn-outline-secondary">Comprar</button>
                   </form>
@@ -171,13 +171,13 @@
           <div class="card" style="width: 18rem;">
             <img src="{{imagen[7][0]}}" class="card-img-top" alt="...">
             <div class="card-body">
-              <p class="card-text">arduino mega rdk</p>
+              <p class="card-text">{{imagen[7][1]}}</p>
               <li class="list-group-item">{{precio[7][0]}}C$</li>
               {% if session.user_id %}
                 <li class="list-group-item">
                   <div id="liveAlertPlaceholder"></div>
                   <form action="/comprar" method="POST">
-                    <input type="hidden" name="name" value="mega rdk">
+                    <input type="hidden" name="name" value="{{imagen[7][1]}}">
                     <input type="hidden" name="precio" value="{{precio[7][0]}}">
                     <button type="submit" class="btn btn-outline-secondary">Comprar</button>
                   </form>
@@ -201,13 +201,13 @@
           <div class="card" style="width: 18rem;">
             <img src="{{imagen[8][0]}}" class="card-img-top" alt="...">
             <div class="card-body">
-              <p class="card-text">arduino micro</p>
+              <p class="card-text">{{imagen[8][1]}}</p>
               <li class="list-group-item">{{precio[8][0]}}C$</li>
               {% if session.user_id %}
                 <li class="list-group-item">
                   <div id="liveAlertPlaceholder"></div>
                   <form action="/comprar" method="POST">
-                    <input type="hidden" name="name" value="micro">
+                    <input type="hidden" name="name" value="{{imagen[8][1]}}">
                     <input type="hidden" name="precio" value="{{precio[8][0]}}">
                     <button type="submit" class="btn btn-outline-secondary">Comprar</button>
                   </form>
@@ -222,13 +222,13 @@
           <div class="card" style="width: 18rem;">
             <img src="{{imagen[9][0]}}" class="card-img-top" alt="...">
             <div class="card-body">
-              <p class="card-text">arduino nano</p>
+              <p class="card-text">{{imagen[9][1]}}</p>
               <li class="list-group-item">{{precio[9][0]}}C$</li>
               {% if session.user_id %}
                 <li class="list-group-item">
                   <div id="liveAlertPlaceholder"></div>
                   <form action="/comprar" method="POST">
-                    <input type="hidden" name="name" value="nano">
+                    <input type="hidden" name="name" value="{{imagen[9][1]}}">
                     <input type="hidden" name="precio" value="{{precio[9][0]}}">
                     <button type="submit" class="btn btn-outline-secondary">Comprar</button>
                   </form>
@@ -243,13 +243,13 @@
           <div class="card" style="width: 18rem;">
             <img src="{{imagen[10][0]}}" class="card-img-top" alt="...">
             <div class="card-body">
-              <p class="card-text">arduino mega</p>
+              <p class="card-text">{{imagen[10][1]}}</p>
               <li class="list-group-item">{{precio[10][0]}}C$</li>
               {% if session.user_id %}
                 <li class="list-group-item">
                   <div id="liveAlertPlaceholder"></div>
                   <form action="/comprar" method="POST">
-                    <input type="hidden" name="name" value="mega">
+                    <input type="hidden" name="name" value="{{imagen[10][1]}}">
                     <input type="hidden" name="precio" value="{{precio[10][0]}}">
                     <button type="submit" class="btn btn-outline-secondary">Comprar</button>
                   </form>
@@ -264,13 +264,13 @@
           <div class="card" style="width: 18rem;">
             <img src="{{imagen[11][0]}}" class="card-img-top" alt="...">
             <div class="card-body">
-              <p class="card-text">arduino esplora</p>
+              <p class="card-text">{{imagen[11][1]}}</p>
               <li class="list-group-item">{{precio[11][0]}}C$</li>
               {% if session.user_id %}
                 <li class="list-group-item">
                   <div id="liveAlertPlaceholder"></div>
                   <form action="/comprar" method="POST">
-                    <input type="hidden" name="name" value="esplora">
+                    <input type="hidden" name="name" value="{{imagen[11][1]}}">
                     <input type="hidden" name="precio" value="{{precio[11][0]}}">
                     <button type="submit" class="btn btn-outline-secondary">Comprar</button>
                   </form>

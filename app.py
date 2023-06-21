@@ -115,7 +115,6 @@ def componentes():
     dato = text("SELECT producto.nombre, tipo_componente.nombre FROM producto INNER JOIN tipo_componente ON CAST(producto.id AS TEXT) = tipo_componente.id_producto")
     runaway=db.execute(dato)
     circles=runaway.fetchall()
-    #print(circles)
 
     #precio
     precio=[]
@@ -145,64 +144,161 @@ def dispositivos():
 @app.route("/arduino")
 def arduino():
     #arduinos
-    dato1=text("SELECT imagen FROM producto WHERE id_categoria = '1'")
+    dato1=text("SELECT imagen, nombre FROM producto WHERE id_categoria = '1'")
     imagen=db.execute(dato1).fetchall()
-    
+
     #precios
     dato2=text("SELECT precio FROM producto WHERE id_categoria = '1'")
     precio=db.execute(dato2).fetchall()
-    
+
     return render_template("arduino.html",imagen=imagen, precio=precio)
 
 
-@app.route('/comprar', methods=['POST'])
+@app.route('/comprar', methods=['GET','POST'])
 def comprar():
-    producto = request.form.get('producto')
-    precio = request.form.get('precio')
-    nombre = request.form.get('name')
-    print(nombre)
-    dato1=text("SELECT cantidad FROM producto WHERE nombre=:nombre")
-    stock=db.execute(dato1,
-                    {"nombre":nombre}).fetchone()
-    print(stock)
-
-
-    return render_template('comprar.html', producto=producto, precio=precio, nombre=nombre, stock=stock[0])
-
-@app.route("/venta")
-def venta():
-    subtotal=""
-    impuesto=0.05
-    descuento=""
-    total= subtotal*impuesto+descuento 
-    fecha_venta= hora
-    
-    dato1=text("INSERT INTO venta (id_usuario, subtotal, impuesto, total, descuento, fecha_venta) VALUES (:id, :subtotal, :impuesto, :total, :descuento, :fecha_venta)")
-    db.execute(dato1,
-               {"id": session["user_id"], "subtotal": subtotal, "impuesto": impuesto,"total":total, "descuento":descuento, "fecha_venta":fecha_venta})
-
-    db.commit()
-
-@app.route("/detalle_venta")
-def detalle_venta():
-    nombre=""
-    cantidad=""
-    precio_unitario=""
-    monto_total=cantidad*precio_unitario
-
-    si=text("SELECT id FROM producto WHERE nombre= :nombre")
-    id_producto=db.execute(si,
+    if request.method == "POST":
+        producto = request.form.get('producto')
+        precio = request.form.get('precio')
+        nombre = request.form.get('name')
+        print(nombre)
+        dato1=text("SELECT cantidad FROM producto WHERE nombre=:nombre")
+        stock=db.execute(dato1,
                         {"nombre":nombre}).fetchone()
+        print(stock)
 
-    venta=text("SELECT id FROM venta WHERE id_usuario=:user")
-    id_venta=db.execute(venta,
-                        {"user":session["user_id"]}).fetchone()
 
-    dato1=text("INSERT INTO detalle_venta (id_producto, id_venta, cantidad, precio_unitario, monto_total) VALUES (:id_producto, :id_venta, :cantidad, :precio_unitario, :monto_total)")
-    db.execute(dato1,
-                {"id_producto":id_producto, "id_venta":id_venta, "cantidad":cantidad, "precio_unitario":precio_unitario, "monto_total":monto_total})
+        return render_template('comprar.html', producto=producto, precio=precio, nombre=nombre, stock=stock[0])
+    else:
+        return redirect('/')
 
-    db.commit()
+@app.route("/carrito", methods=['GET', 'POST'])
+@login_required
+def carrito():
+    id=session["user_id"]
+    if request.method == "POST":
+
+        precio=request.form.get('precio')
+        stock=request.form.get('stock')
+        nombre=request.form.get('nombre')
+        cantidad=request.form.get('cantidad')
+        id_producto=""
+        try:
+            tipo=request.form.get('tipo')
+        except:
+            tipo='none'
+
+        if not stock:
+            flash("producto agotado")
+            return render_template("comprar.html")
+
+        if not cantidad:
+            flash("ingrese cuanto necesitas")
+            return render_template("comprar.html")
+
+        if cantidad >= stock:
+            flash("cantidad mayor a lo que hay disponible")
+            return render_template("comprar.html")
+
+        if tipo == None:
+            dato1=text("SELECT id FROM producto where nombre = :nombre")
+            id_producto=db.execute(dato1,
+                                    {"nombre":nombre}).fetchone()
+            print("no hay tipo")
+        else:
+            dato = text("SELECT tipo_componente.id FROM producto INNER JOIN tipo_componente ON CAST(producto.id AS TEXT) = tipo_componente.id_producto WHERE tipo_componente.nombre =:tipo")
+            id_producto=db.execute(dato,
+                                {"tipo":tipo}).fetchone()
+        producto=id_producto[0]
+
+        try:
+            a=text("INSERT INTO carrito (producto, precio, cantidad, id_user) VALUES(:producto, :precio, :cantidad, :id_user)")
+            db.execute(a,{"producto":producto, "precio":str(precio), "cantidad":str(cantidad), "id_user":str(id)})
+            db.commit()
+        except OperationalError:
+            print("Error connecting to the database :/")
+
+        a=text("SELECT * FROM carrito WHERE id_user=:id")
+        carrito=db.execute(a,
+                        {"id":str(id)}).fetchall()
+        
+        conteo = len(carrito)
+        nombre=""
+        for i in carrito:
+            print(i[1])
+            why=text("SELECT nombre from producto WHERE id = :id")
+            nombre=db.execute(why,{"id":producto}).fetchall()
+        print(nombre)
+        price = 0
+        cantidades= 0
+        for i in range(conteo):
+            price = price + int(carrito[i][2])
+            cantidades= cantidades + int(carrito[i][3])
+        
+        subtotal= cantidades*price
+
+        return render_template('carrito.html', nombre=nombre[0], muchos=conteo, carrito=carrito, subtotal=subtotal)
+
+    else:
+        
+        a = text("SELECT * FROM carrito WHERE id_user=:id")
+        carrito = db.execute(a, {"id": str(id)}).fetchall()
+
+        if not carrito:
+            flash("carrito vacio")
+            return render_template("index.html")
+
+        nombre=""
+        for i in carrito:
+            print(i[1])
+            why=text("SELECT nombre from producto WHERE id = :id")
+            nombre=db.execute(why,{"id":i[1]}).fetchall()
+
+        conteo = len(carrito)
+        price = 0
+        cantidades= 0
+        for i in range(conteo):
+            price = price + int(carrito[i][2])
+            cantidades= cantidades + int(carrito[i][3])
+        
+        subtotal= cantidades*price
+
+        return render_template('carrito.html', nombre=nombre[0], muchos=conteo, carrito=carrito, subtotal=subtotal)
+
+
+@app.route("/venta", methods=['GET', 'POST'])
+def venta():
+    if request.method == "POST":
+
+        subtotal= int(request.form.get("subtotal"))
+        impuesto=0.05
+        descuento=0
+        totali= int(subtotal*impuesto+descuento) 
+        total=subtotal-totali
+        fecha_venta= hora  
+        
+        dato1=text("INSERT INTO venta (id_user, subtotal, total, descuento, fecha_venta) VALUES (:id, :subtotal, :total, :descuento, :fecha_venta)")
+        db.execute(dato1,
+                {"id": session["user_id"], "subtotal": subtotal, "total":total, "descuento":descuento, "fecha_venta":fecha_venta})
+
+        venta=text("SELECT id FROM venta WHERE id_user=:user")
+        id_venta=db.execute(venta,
+                            {"user":session["user_id"]}).fetchone()
+
+        a = text("SELECT * FROM carrito WHERE id_user=:id")
+        carrito = db.execute(a, {"id":str(session["user_id"])}).fetchall()
+
+        conteo = len(carrito)
+        for i in range(conteo):
+            monto_total= int(carrito[i][3]) * int(carrito[i][2])
+            dato1=text("INSERT INTO detalle_venta (id_producto, id_venta, cantidad, precio_unitario, monto_total) VALUES (:id_producto, :id_venta, :cantidad, :precio_unitario, :monto_total)")
+            db.execute(dato1,
+                        {"id_producto":int(carrito[i][1]), "id_venta":id_venta[0], "cantidad":int(carrito[i][3]), "precio_unitario":carrito[i][2], "monto_total":monto_total})
+            db.commit()
+
+        return render_template("venta.html", subtotal=subtotal, impuesto=impuesto, fecha_venta=fecha_venta, descuento=descuento,total=total)
+    else:
+        return redirect("/")
+
 
     @app.route("/historial")
     def detalle_venta():

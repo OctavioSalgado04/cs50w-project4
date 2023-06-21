@@ -4,18 +4,18 @@ $color: black;
     background-color: white;
     margin-bottom: 0.1em;
 }
-$letras: 2px 0 0 #000,
--2px 0 0 #000,
-0 2px 0 #000,
-0 -2px 0 #000,
-1px 1px #000,
--1px -1px 0 #000,
-1px -1px 0 #000,
--1px 1px 0 #000;
+$letras: 2px 0 0 white,
+-2px 0 0 white,
+0 2px 0 white,
+0 -2px 0 white,
+1px 1px white,
+-1px -1px 0 white,
+1px -1px 0 white,
+-1px 1px 0 white;
 %letras {
     padding: 10px;
     text-shadow: $letras;
-    color: white;
+    color: #000;
 }
 %fondo{
     background-size: cover;
@@ -148,7 +148,7 @@ a:hover{
 .carrusel{
     @extend %margen;
 }
-.separo{
+.resumin{
     @extend %letras;
-    margin-bottom: 10cm;
+    margin-left: 1rem;
 }

@@ -4,6 +4,12 @@
   margin-bottom: 0.1em;
 }
 
+.resumin {
+  padding: 10px;
+  text-shadow: 2px 0 0 white, -2px 0 0 white, 0 2px 0 white, 0 -2px 0 white, 1px 1px white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white;
+  color: #000;
+}
+
 .body {
   background-color: rgb(255, 230, 0);
 }
@@ -123,4 +129,8 @@ input[type=submit] :hover {
 
 .espaciado {
   margin-top: 2%;
+}
+
+.resumin {
+  margin-left: 1rem;
 }/*# sourceMappingURL=style.css.map */

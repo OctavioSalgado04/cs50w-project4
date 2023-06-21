@@ -33,13 +33,13 @@ def read_file(filename, col_list):
         dato2=text("SELECT id FROM producto WHERE id_categoria = :id")
         id=db.execute(dato2,
                         {"id":id_categoria[0]})
-        db.commit()
-
+        k=0
         for i in (id):
             for j in (i):
                 dato3=text("INSERT INTO tipo_componente (id_producto, nombre) VALUES (:id_producto, :nombre)")       
                 db.execute(dato3,
-                            {"id_producto":i[0], "nombre":nombre[j]})
+                            {"id_producto":j, "nombre":nombre[k]})
+                k+=1
                             
                 db.commit()
 

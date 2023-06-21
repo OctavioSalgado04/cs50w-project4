@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+{% block title %}carrito{% endblock %}
+{% block content %}
+<div class="info">
+    {% for i in range(muchos) %}
+    <p>{{nombre[0]}} precio={{carrito[i][2]}} cantidad={{carrito[i][3]}}</p>
+    {% endfor %}
+    <form action="/venta" method="post">
+        <input type="hidden" name="subtotal" value="{{subtotal}}">
+        <button type="submit" class="btn btn-outline-secondary">terminar la compra</button>
+    </form>                
+</div>
+{% endblock %}

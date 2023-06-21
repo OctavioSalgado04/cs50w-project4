@@ -2,18 +2,50 @@
 {% block title %}compra{% endblock %}
 {% block content %}
 <div class="info">
-    <h2>Detalles de la compra:</h2>
-    <p>nombre del producto seleccionado: {{nombre}}</p>
-    {% if not producto %}
-    <p>stock: {{ stock }}</p>
-    <p>Precio: {{ precio }}</p>
-    {% else %}
-    <p>TIPO: {{ producto }}</p>
-    <p>stock: {{ stock }}</p>
-    <p>Precio: {{ precio }}</p>
-    {% endif %}
-    
-    <div id="liveAlertPlaceholder"></div>
-    <button type="submit" class="btn btn-outline-secondary" onclick="">enviar al carrito</button>
+    <form action="/carrito" method="POST">
+        <div class="resumin">
+            <h2>Detalles de la compra:</h2>
+            <p>nombre del producto seleccionado: {{nombre}}</p>
+            <input type="hidden" name="nombre" value="{{nombre}}">
+            {% if not producto %}
+            <p>stock: {{ stock }}</p>
+            <input type="hidden" name="stock" value="{{stock}}">
+            <p>Precio: {{ precio }}C$</p>
+            <input type="hidden" name="precio" value="{{precio}}">
+            <input type="number" name="cantidad" min="1" max="50" placeholder="50">
+            {% else %}
+            <p>tipo: {{ producto }}</p> 
+            <input type="hidden" name="tipo" value="{{producto}}">
+            <p>stock: {{ stock }}</p>
+            <input type="hidden" name="stock" value="{{stock}}">
+            <p>Precio: {{ precio }}c$</p>
+            <input type="hidden" name="precio" value="{{precio}}">
+            <input type="number" name="cantidad" min="1" max="50" placeholder="50">
+            {% endif %}
+        </div>
+
+        <div class="container text-center">
+            <div class="row">
+            <div class="col">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-info" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div id="liveAlertPlaceholder"></div>
+                {% endif %}
+                {% endwith %}
+                    <button type="submit" class="btn btn-outline-secondary" onclick="agregarAlCarrito()">Enviar al carrito</button>
+                    <br><br>
+                </div>
+            
+            </div>
+        </div>
+    </form>
+
 </div>
+<script src="/static/componentes.js"></script>
 {% endblock %}

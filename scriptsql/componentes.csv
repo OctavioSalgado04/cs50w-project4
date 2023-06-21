@@ -1,104 +1,104 @@
 tipo,name,precio
-regulador de voltaje fijo,LM7805,30.00NIO
-regulador de voltaje fijo,LM7815,30.00NIO
-regulador de voltaje fijo,LM7806,30.00NIO
-regulador de voltaje fijo,LM7809,30.00NIO
-regulador de voltaje fijo,LM7812,30.00NIO
-regulador de voltaje fijo,LM317L,30.00NIO
-regulador de voltaje fijo,LM338,30.00NIO
-regulador de voltaje fijo,LM1117,30.00NIO
-regulador de voltaje fijo,LM7805CV,30.00NIO
-regulador de voltaje fijo,LM7812CV,30.00NIO
-amplificador operacional,LM741,30.00NIO
-amplificador operacional,LM324,30.00NIO
-amplificador operacional,LM358,30.00NIO
-amplificador operacional,TL072,30.00NIO
-amplificador operacional,AD822,30.00NIO
-amplificador operacional,LT1013,30.00NIO
-amplificador operacional,LM358N,30.00NIO
-amplificador operacional,AD827,30.00NIO
-amplificador operacional,LM386,30.00NIO
-amplificador operacional,TL084,30.00NIO
-amplificador operacional,NE5532,30.00NIO
-amplificador operacional,LM741NC,30.00NIO
-amplificador operacional,LM358P,30.00NIO
-amplificador operacional,LM358D,30.00NIO
-temporizador IC,LM555,39.12NIO
-temporizador IC,NE555,39.12NIO
-temporizador IC,NE556,39.12NIO
-temporizador IC,CD4011,39.12NIO
-temporizador IC,CD4060,39.12NIO
-temporizador IC,555C,39.12NIO
-temporizador IC,TLC555,39.12NIO
-temporizador IC,MC14541,39.12NIO
-temporizador IC,CD4541,39.12NIO
-regulador de voltaje ajustable,LM317,469.00NIO
-regulador de voltaje ajustable,LM338,469.00NIO
-regulador de voltaje ajustable,LM350,469.00NIO
-regulador de voltaje ajustable,LM17L,469.00NIO
-regulador de voltaje ajustable,LM1084,460.00NIO
-regulador de voltaje ajustable,LM317K,460.00NIO
-regulador de voltaje ajustable,LM338K,460.00NIO
-regulador de voltaje ajustable,LM350T,460.00NIO
-regulador de voltaje ajustable,LM1086,460.00NIO
-regulador de voltaje ajustable,LM317M,460.00NIO
-regulador de voltaje ajustable,LM1085IT-ADJ,465.37NIO
-regulador de voltaje ajustable,LT1083CP,465.37NIO
-regulador de voltaje ajustable,LT1084CP,465.37NIO
-regulador de voltaje ajustable,LM317HVT,465.37NIO
-regulador de voltaje ajustable,LM530K,465.37NIO
-regulador de voltaje ajustable,TL431,465.37NIO
-regulador de voltaje ajustable,LM317MP,465.37NIO
-regulador de voltaje ajustable,LT3080,465.37NIO
-amplificador de audio de bajo voltaje,LM386,40.79NIO
-amplificador de audio de bajo voltaje,TDA2822,40.79NIO
-amplificador de audio de bajo voltaje,TPA611A2,40.79NIO
-amplificador de microfono de bajo voltaje,MAX9814,40.79NIO
-amplificador estereo de audio de bajo voltaje,PAM8403,40.79NIO
-amplificadorde audio de bajo voltaje,NJM2073,40.79NIO
-amplificadorde audio de bajo voltaje,TS4871,40.79NIO
-amplificadorde audio de bajo voltaje,LM4941,40.79NIO
-amplificadorde audio de bajo voltaje,STA540,40.79NIO
-resistencias,1ohm 5%,2.00NIO
-resistencias,10ohm 5%,2.00NIO
-resistencias,22 ohm 5%,2.00NIO
-resistencias,47 ohm 5%,2.00NIO
-resistencias,100 ohm 5%,2.00NIO
-resistencias,130 ohm 5%,2.00NIO
-resistencias,220 ohm 5%,2.00NIO
-resistencias,470 ohm 5%,2.00NIO
-resistencias,680 ohm 5%,2.00NIO
-resistencias,4.7k ohm 5%,2.00NIO
-resistencias,5k ohm 5%,2.00NIO
-resistencias,1k ohm 5%,2.00NIO
-resistencias,1.2k ohm 5%,2.00NIO
-resistencias,3.3k ohm 5%,2.00NIO
-resistencias,4.7k ohm 5%,2.00NIO
-resistencias,6.8k ohm 5%,2.00NIO
-resistencias,10k ohm 5%,2.00NIO
-resistencias,12k ohm 5%,2.00NIO
-resistencias,22k ohm 5%,2.00NIO
-resistencias,47k ohm 5%,2.00NIO
-resistencias,56k ohm 5%,2.00NIO
-resistencias,82k ohm 5%,2.00NIO
-resistencias,100k ohm 5%,2.00NIO
-resistencias,220k ohm 5%,2.00NIO
-resistencias,330k ohm 5%,2.00NIO
-resistencias,470k ohm 5%,2.00NIO
-resistencias,680k ohm 5%,2.00NIO
-resistencias,1M ohm 5%,2.00NIO
-PNP transistores bipolares,2N3906,72.45NIO
-PNP transistores bipolares,2N2907,72.45NIO
-PNP transistores bipolares,BC2907,72.45NIO
-(FET)transistores de efecto de campo,J310,14.52NIO
-(FET)transistores de efecto de campo,IRFZ44N,1450NIO
-(JFET)transistores de union de campo,J113,14.50NIO
-(JFET)transistores de union de campo,BF245,14.50NIO
-transistores darlington,TIP120,19.80NIO
-transistores darlington,ULN2803,19.80NIO
-(BJT)transistores de potencias bipolares,TIP31C,15.00NIO
-(BJT)transistores de potencias bipolares,TIP41C,15.00NIO
-(BJT)transistores de potencias bipolares,TIP122,15.00NIO
-(BJT)transistores de potencias bipolares,2N222,15.00NIO
-MOSFET de potencia,IRF540,15.00NIO
-MOSFET de potencia,IRFZ44,15.00NIO
+regulador de voltaje fijo,LM7805,30
+regulador de voltaje fijo,LM7815,30
+regulador de voltaje fijo,LM7806,30
+regulador de voltaje fijo,LM7809,30
+regulador de voltaje fijo,LM7812,30
+regulador de voltaje fijo,LM317L,30
+regulador de voltaje fijo,LM338,30
+regulador de voltaje fijo,LM1117,30
+regulador de voltaje fijo,LM7805CV,30
+regulador de voltaje fijo,LM7812CV,30
+amplificador operacional,LM741,30
+amplificador operacional,LM324,30
+amplificador operacional,LM358,30
+amplificador operacional,TL072,30
+amplificador operacional,AD822,30
+amplificador operacional,LT1013,30
+amplificador operacional,LM358N,30
+amplificador operacional,AD827,30
+amplificador operacional,LM386,30
+amplificador operacional,TL084,30
+amplificador operacional,NE5532,30
+amplificador operacional,LM741NC,30
+amplificador operacional,LM358P,30
+amplificador operacional,LM358D,30
+temporizador IC,LM555,39.
+temporizador IC,NE555,39.
+temporizador IC,NE556,39.
+temporizador IC,CD4011,39
+temporizador IC,CD4060,39
+temporizador IC,555C,39
+temporizador IC,TLC555,39
+temporizador IC,MC14541,39
+temporizador IC,CD4541,39
+regulador de voltaje ajustable,LM317,46
+regulador de voltaje ajustable,LM338,46
+regulador de voltaje ajustable,LM350,46
+regulador de voltaje ajustable,LM17L,46
+regulador de voltaje ajustable,LM1084,46
+regulador de voltaje ajustable,LM317K,46
+regulador de voltaje ajustable,LM338K,46
+regulador de voltaje ajustable,LM350T,46
+regulador de voltaje ajustable,LM1086,46
+regulador de voltaje ajustable,LM317M,46
+regulador de voltaje ajustable,LM1085IT-ADJ,46
+regulador de voltaje ajustable,LT1083CP,46
+regulador de voltaje ajustable,LT1084CP,46
+regulador de voltaje ajustable,LM317HVT,46
+regulador de voltaje ajustable,LM530K,46
+regulador de voltaje ajustable,TL431,46
+regulador de voltaje ajustable,LM317MP,46
+regulador de voltaje ajustable,LT3080,46
+amplificador de audio de bajo voltaje,LM386,40
+amplificador de audio de bajo voltaje,TDA2822,40
+amplificador de audio de bajo voltaje,TPA611A2,40
+amplificador de microfono de bajo voltaje,MAX9814,40
+amplificador estereo de audio de bajo voltaje,PAM8403,40
+amplificadorde audio de bajo voltaje,NJM2073,40
+amplificadorde audio de bajo voltaje,TS4871,40
+amplificadorde audio de bajo voltaje,LM4941,40
+amplificadorde audio de bajo voltaje,STA540,40
+resistencias,1ohm 5%,2
+resistencias,10ohm 5%,2
+resistencias,22 ohm 5%,2
+resistencias,47 ohm 5%,2
+resistencias,100 ohm 5%,2
+resistencias,130 ohm 5%,2
+resistencias,220 ohm 5%,2
+resistencias,470 ohm 5%,2
+resistencias,680 ohm 5%,2
+resistencias,4.7k ohm 5%,2
+resistencias,5k ohm 5%,2
+resistencias,1k ohm 5%,2
+resistencias,1.2k ohm 5%,2
+resistencias,3.3k ohm 5%,2
+resistencias,4.7k ohm 5%,2
+resistencias,6.8k ohm 5%,2
+resistencias,10k ohm 5%,2
+resistencias,12k ohm 5%,2
+resistencias,22k ohm 5%,2
+resistencias,47k ohm 5%,2
+resistencias,56k ohm 5%,2
+resistencias,82k ohm 5%,2
+resistencias,100k ohm 5%,2
+resistencias,220k ohm 5%,2
+resistencias,330k ohm 5%,2
+resistencias,470k ohm 5%,2
+resistencias,680k ohm 5%,2
+resistencias,1M ohm 5%,2
+PNP transistores bipolares,2N3906,72
+PNP transistores bipolares,2N2907,72
+PNP transistores bipolares,BC2907,72
+(FET)transistores de efecto de campo,J310,14
+(FET)transistores de efecto de campo,IRFZ44N,14
+(JFET)transistores de union de campo,J113,14
+(JFET)transistores de union de campo,BF245,14
+transistores darlington,TIP120,19
+transistores darlington,ULN2803,19
+(BJT)transistores de potencias bipolares,TIP31C,15
+(BJT)transistores de potencias bipolares,TIP41C,15
+(BJT)transistores de potencias bipolares,TIP122,15
+(BJT)transistores de potencias bipolares,2N222,15
+MOSFET de potencia,IRF540,15
+MOSFET de potencia,IRFZ44,15
