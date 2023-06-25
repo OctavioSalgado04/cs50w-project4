@@ -3,10 +3,11 @@
 {% block content %}
 <div class="info">
     {% for i in range(muchos) %}
-    <p>{{nombre[0]}} precio={{carrito[i][2]}} cantidad={{carrito[i][3]}}</p>
+    <p>{{nombre[i]}} precio=C${{carrito[i][2]}} cantidad={{carrito[i][3]}}</p>
     {% endfor %}
     <form action="/venta" method="post">
         <input type="hidden" name="subtotal" value="{{subtotal}}">
+        <input type="hidden" name="producto" value="{{nombre[0]}}"> 
         <button type="submit" class="btn btn-outline-secondary">terminar la compra</button>
     </form>                
 </div>

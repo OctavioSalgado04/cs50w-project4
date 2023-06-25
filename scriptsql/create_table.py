@@ -14,6 +14,7 @@ def main():
     tabla1=text("""CREATE TABLE usuario (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
+    correo TEXT NOT NULL,
     password TEXT NOT NULL,
     admin INT NOT NULL
     );   
@@ -115,6 +116,17 @@ def main():
     );
     """)
     db.execute(tabla0)
+
+    tabl4=text("""CREATE TABLE informacion_personal(
+    id SERIAL PRIMARY KEY,
+    id_user int not null,
+    usuario text NOT NULL,
+    direccion text NOT NULL,
+    url TEXT NOT NULL,
+    descripcion text NOT NULL
+    );
+    """)
+    db.execute(tabl4)
 
     db.commit()
 

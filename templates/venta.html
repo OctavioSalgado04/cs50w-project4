@@ -1,12 +1,39 @@
 {% extends 'layout.html' %}
 {% block title %}venta{% endblock %}
 {% block content %}
-<div class="info">
-    <p>i want money</p>
-    sub_total:{{subtotal}}
-    impuesto:{{impuesto}}
-    fecha:{{fecha_venta}}
-    descuento aplicado:{{descuento}}
-    total: {{total}}
+
+<div class="venta">
+    <h1>detalles de la compra</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">producto</th>
+                <th scope="col">sub_total</th>
+                <th scope="col">impuesto</th>
+                <th scope="col">total</th>
+                <th scope="col">fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in range(conteo) %}
+            <tr>
+                <th scope="row">{{i}}</th>
+                <td>{{producto[i]}}</td>
+                <td>{{C$subtotal[i]}}</td>
+                <td>{{impuesto}}</td>
+                <td>{{C$total[i]}}</td>
+                <td>{{fecha_venta[i][0]}}</td>
+
+            {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+    <div class="info">total a pagar=C${{nosi}}</div>
+    <br></br>
+    <form action="/pagar" method="post">
+        <button type="submit" class="btn btn-secondary">pagar</button>
+    </form>
 </div>
+
 {% endblock %}

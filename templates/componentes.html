@@ -184,6 +184,11 @@
               <li class="list-group-item">
                 <p>precio:{{precio[4]}}</p>
                 <input type="hidden" name="precio" value="{{precio[4]}}">
+                {% for i in name %}
+                    {% if i[0] == 'amplificador de audio de bajo voltaje' %}
+                    <input type="hidden" name="name" value="{{i[0]}}">
+                    {% endif %}
+                  {% endfor %}
               </li>
               {% if session.user_id %}
                 <li class="list-group-item">
@@ -216,6 +221,11 @@
               <li class="list-group-item">
                 <p>precio:{{precio[5]}}</p>
                 <input type="hidden" name="precio" value="{{precio[5]}}">
+                {% for i in name %}
+                    {% if i[0] == 'resistencias' %}
+                    <input type="hidden" name="name" value="{{i[0]}}">
+                    {% endif %}
+                  {% endfor %}
               </li>
               {% if session.user_id %}
                 <li class="list-group-item">
@@ -248,6 +258,11 @@
               <li class="list-group-item">
                 <p>precio:{{precio[6]}}</p>
                 <input type="hidden" name="precio" value="{{precio[6]}}">
+                {% for i in name %}
+                    {% if i[0] == 'PNP transistores bipolares' %}
+                    <input type="hidden" name="name" value="{{i[0]}}">
+                    {% endif %}
+                  {% endfor %}
               </li>
               {% if session.user_id %}
                 <li class="list-group-item">
@@ -280,6 +295,11 @@
               <li class="list-group-item">
                 <p>precio:{{precio[7]}}</p>
                 <input type="hidden" name="precio" value="{{precio[7]}}">
+                {% for i in name %}
+                    {% if i[0] == '(FET)transistores de efecto de campo' %}
+                    <input type="hidden" name="name" value="{{i[0]}}">
+                    {% endif %}
+                  {% endfor %}
               </li>
               {% if session.user_id %}
                 <li class="list-group-item">
@@ -321,6 +341,11 @@
               <li class="list-group-item">
                 <p>precio:{{precio[8]}}</p>
                 <input type="hidden" name="precio" value="{{precio[8]}}">
+                {% for i in name %}
+                    {% if i[0] == 'transistores darlington' %}
+                    <input type="hidden" name="name" value="{{i[0]}}">
+                    {% endif %}
+                  {% endfor %}
               </li>
               {% if session.user_id %}
                 <li class="list-group-item">
@@ -353,6 +378,11 @@
               <li class="list-group-item">
                 <p>precio:{{precio[9]}}</p>
                 <input type="hidden" name="precio" value="{{precio[9]}}">
+                {% for i in name %}
+                    {% if i[0] == '(BJT)transistores de potencias bipolares' %}
+                    <input type="hidden" name="name" value="{{i[0]}}">
+                    {% endif %}
+                  {% endfor %}
               </li>
               {% if session.user_id %}
                 <li class="list-group-item">
@@ -385,6 +415,11 @@
               <li class="list-group-item">
                 <p>precio:{{precio[10]}}</p>
                 <input type="hidden" name="precio" value="{{precio[10]}}">
+                {% for i in name %}
+                    {% if i[0] == '(JFET)transistores de union de campo' %}
+                      <input type="hidden" name="name" value="{{i[0]}}">
+                    {% endif %}
+                  {% endfor %}
               </li>
               {% if session.user_id %}
                 <li class="list-group-item">
@@ -417,6 +452,11 @@
               <li class="list-group-item">
                 <p>precio:{{precio[11]}}</p>
                 <input type="hidden" name="precio" value="{{precio[11]}}">
+                {% for i in name %}
+                    {% if i[0] == 'MOSFET de potencia' %}
+                    <input type="hidden" name="name" value="{{i[0]}}">
+                    {% endif %}
+                  {% endfor %}
               </li>
               {% if session.user_id %}
                 <li class="list-group-item">

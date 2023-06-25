@@ -30,19 +30,24 @@
         <h1>Registrarse</h1>
         <form action="/register" method="post">
             <div class="mb-3" class="username">
+            <br>
+            <label for="exampleInputEmail1" class="form-label">correo electronico</label>
+            <br>
+            <input class="config" name="correo" type="email" placeholder="correo" required>
+            <br>
             <label for="exampleInputEmail1" class="form-label">Nombre de usuario</label>
             <br>
-            <input class="config" name="usuario" type="text" placeholder="Nombre">
+            <input class="config" name="usuario" type="text" placeholder="Nombre" required>
             </div>
             <div class="mb-3" class="password">
                 <label for="exampleInputPassword1" class="form-label">Introduzca contraseña</label>
                 <br>
-                <input class="config" name="password" type="password" placeholder="contraseña">
+                <input class="config" name="password" type="password" placeholder="contraseña" required>
             </div>
             <div class="mb-3" class="password">
                 <label for="exampleInputPassword1" class="form-label">Confirmar contraseña</label>
                 <br>
-                <input class="config" name="confirmar" type="password"  placeholder="contraseña">
+                <input class="config" name="confirmar" type="password"  placeholder="contraseña" required>
             </div>
             <div class="espaciado">
                 <input type="submit" value="Registrarse">

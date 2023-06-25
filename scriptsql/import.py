@@ -27,7 +27,7 @@ def read_file(filename, col_list):
 
         nombre = []
         for i in reader:
-            nombre.append(i["name"])
+            nombre .append(i["name"])
         print(nombre)
         
         dato2=text("SELECT id FROM producto WHERE id_categoria = :id")

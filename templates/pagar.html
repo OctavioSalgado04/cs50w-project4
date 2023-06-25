@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% block title %}pagar{% endblock %}
+{% block content %}
+<div class="tarjeta">
+    teamo
+    <div class="card">
+        <form action="/procesar-pago" method="POST" onsubmit="return validarTarjeta()">
+          <p> ingrese su direccion:</p>
+          <input type="text" name="direccion" required>
+          <h1> Tarjeta de Crédito</h1>
+          <label for="nombre-tarjeta">Nombre en la Tarjeta:</label>
+          <input type="text" id="nombre-tarjeta" name="nombre-tarjeta" required>
+          <br>
+          <label for="numero-tarjeta">Número de Tarjeta:</label>
+          <input type="text" id="numero-tarjeta" name="numero-tarjeta" required>
+          <br>
+          <label for="fecha-expiracion">Fecha de Expiración (MM/AA):</label>
+          <input type="text" id="fecha-expiracion" name="fecha-expiracion" required>
+          <br>
+          <label for="cvv">CVV:</label>
+          <input type="text" id="cvv" name="cvv" required>
+          <br>
+          <button type="submit" class="button">Pagar</button>
+        </form>
+    </div>
+</div>
+<script src="/static/tarjeta.js"></script>
+{% endblock %}

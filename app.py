@@ -1,4 +1,5 @@
 import os
+import re
 import requests
 from flask import Flask, render_template, request, redirect, session, flash, jsonify
 from flask_session import Session
@@ -24,9 +25,14 @@ formato_hora = datetime.datetime.now()
 hora = formato_hora.strftime("el %d-%m-%Y a las %H:%M:%S")
 print(hora)
 
+def validar_correo(correo):
+    patron = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+    return re.match(patron, correo) is not None
+
 @app.route("/")
 def index():
-        return render_template("index.html")
+    
+    return render_template("index.html")
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
@@ -44,14 +50,23 @@ def login():
             flash("ingrese su contraseña")
             return render_template('login.html')
 
-        dato1 =text("SELECT * FROM usuario WHERE name = :name")
-        existe=db.execute(dato1,{"name":name}).fetchone()
-        if existe == None or existe[2] != password:
+        dato1 =text("SELECT * FROM usuario WHERE name = :name or correo =:nace")
+        existe=db.execute(dato1,{"name":name, "nace":name}).fetchone()
+        if existe == None or existe[3] != password:
             flash("Usuario mal ingresado o clave incorrecta")
             return render_template('login.html')
         session["user_id"]= existe[0]
+        session["usuario"]= existe[1]
 
-        flash(f"bienvenido {name}")
+        mcr= text("SELECT url FROM informacion_personal WHERE id_user=:id")
+        img= db.execute(mcr, {"id":int(existe[0])}).fetchone()
+
+        if img == None:
+            session["img"]="/static/image/perfil.webp"
+        else:
+            session["img"]= img[0]
+
+        flash(f"bienvenido {existe[1]}")
         return redirect("/")
     else:
         return render_template('login.html')
@@ -62,35 +77,37 @@ def register():
     if request.method == "get":
         return render_template('register.html')
     else:
+        correo = request.form.get('correo')
         usuario = request.form.get("usuario")
         password = request.form.get("password")
         confirma = request.form.get("confirmar")
 
-        if not usuario and not password and not confirma:
-            flash("campos vacios")
+        if not correo  or not usuario  or not password or not confirma:
+            flash("rellene todos los campos")
             return render_template('register.html')
-        if not password:
-            flash("ingrese una contraseña")
-            render_template('register.html')
-        if not confirma:
-            flash("ingrese una contraseña")
-            return render_template('register.html')
+
+        if not validar_correo(correo):
+            flash("Correo electrónico inválido.")
+            return render_template("register.html")
+
         if password != confirma:
             flash("claves distintas")
             return render_template('register.html')
+
         dato1 = text("SELECT * FROM usuario WHERE name = :usuario")
         consulta = db.execute(dato1,{"usuario":usuario}).fetchone()
 
         if consulta == None:
-            sesion = text("INSERT INTO usuario (name, password,admin) VALUES(:usuario,:password,:admin)")
-            db.execute(sesion,
-                    {"usuario": usuario, "password": password, "admin": 0 })
+            sesion = text("INSERT INTO usuario (name, correo,password,admin) VALUES(:usuario, :correo,:password,:admin)")
+            db.execute(sesion, {"usuario": usuario, "correo":correo,"password": password, "admin": 0 })
 
             db.commit()
 
             dato2 = text("SELECT * FROM usuario WHERE name = :usuario")
             row = db.execute(dato2,{"usuario":usuario}).fetchone()
             session["user_id"] = row[0]
+            session["usuario"]= row[1]
+            session["img"]="/static/image/perfil.webp"
             flash(f"ya ha sido registrado como {usuario}")
             return redirect("/")
 
@@ -98,7 +115,7 @@ def register():
             flash("nombre ya en uso")
             return render_template('register.html')
 
-        if consulta[1] == usuario and consulta[2] == password and consulta[2] == confirma:
+        if consulta[1] == usuario and consulta[3] == password and consulta[3] == confirma and consulta[2] == correo:
             flash("usuario ya existente")
             return render_template('register.html')
 
@@ -107,6 +124,12 @@ def logout():
     session.clear()
     return redirect("/login")
 
+@app.route("/perfil")
+@login_required
+def perfil():
+    f=session["usuario"]
+    img= session["img"]
+    return render_template("perfil.html", f=f, img=img)
 
 @app.route("/componentes")
 def componentes():
@@ -178,12 +201,20 @@ def carrito():
     if request.method == "POST":
 
         precio=request.form.get('precio')
-        stock=request.form.get('stock')
         nombre=request.form.get('nombre')
         cantidad=request.form.get('cantidad')
         id_producto=""
+        id_poducto=""
+        dato1=text("SELECT cantidad FROM producto WHERE nombre=:nombre")
+        stock=db.execute(dato1,
+                        {"nombre":nombre}).fetchone()
+        isa=0
+        for i in stock:
+            isa=i
+        
         try:
             tipo=request.form.get('tipo')
+            print(tipo)
         except:
             tipo='none'
 
@@ -195,7 +226,7 @@ def carrito():
             flash("ingrese cuanto necesitas")
             return render_template("comprar.html")
 
-        if cantidad >= stock:
+        if int(cantidad) > isa:
             flash("cantidad mayor a lo que hay disponible")
             return render_template("comprar.html")
 
@@ -203,31 +234,54 @@ def carrito():
             dato1=text("SELECT id FROM producto where nombre = :nombre")
             id_producto=db.execute(dato1,
                                     {"nombre":nombre}).fetchone()
+            
             print("no hay tipo")
         else:
-            dato = text("SELECT tipo_componente.id FROM producto INNER JOIN tipo_componente ON CAST(producto.id AS TEXT) = tipo_componente.id_producto WHERE tipo_componente.nombre =:tipo")
-            id_producto=db.execute(dato,
+            dato = text("SELECT producto.id, tipo_componente.id FROM producto INNER JOIN tipo_componente ON CAST(producto.id AS TEXT) = tipo_componente.id_producto WHERE tipo_componente.nombre =:tipo")
+            id_poducto=db.execute(dato,
                                 {"tipo":tipo}).fetchone()
+            id_producto=id_poducto
         producto=id_producto[0]
+        print(producto)
+        acu=text("SELECT producto FROM carrito WHERE id_user = :id_user")
+        acun=db.execute(acu, {"id_user":str(id)}).fetchall()
 
-        try:
-            a=text("INSERT INTO carrito (producto, precio, cantidad, id_user) VALUES(:producto, :precio, :cantidad, :id_user)")
-            db.execute(a,{"producto":producto, "precio":str(precio), "cantidad":str(cantidad), "id_user":str(id)})
-            db.commit()
-        except OperationalError:
-            print("Error connecting to the database :/")
+        print(f" my wolrd is ending i wish {acun}")
 
+        if not acun:
+
+            try:
+                a=text("INSERT INTO carrito (producto, precio, cantidad, id_user) VALUES(:producto, :precio, :cantidad, :id_user)")
+                db.execute(a,{"producto":producto, "precio":str(precio), "cantidad":str(cantidad), "id_user":str(id)})
+                db.commit()
+            except OperationalError:
+                print("Error connecting to the database :/")
+
+        else:
+            if int(producto) in [int(i[0]) for i in acun]:
+                print("Aquí estoy")
+                actualiza = text("UPDATE carrito SET cantidad = CAST((CAST(cantidad AS INTEGER) + :cantidad) AS TEXT) WHERE id_user = :id")
+                db.execute(actualiza, {"cantidad": str(cantidad), "id": str(id)})
+                db.commit()
+            else:
+                try:
+                    a=text("INSERT INTO carrito (producto, precio, cantidad, id_user) VALUES(:producto, :precio, :cantidad, :id_user)")
+                    db.execute(a,{"producto":producto, "precio":str(precio), "cantidad":str(cantidad), "id_user":str(id)})
+                    db.commit()
+                except OperationalError:
+                    print("Error connecting to the database :/")
+    
         a=text("SELECT * FROM carrito WHERE id_user=:id")
         carrito=db.execute(a,
                         {"id":str(id)}).fetchall()
         
         conteo = len(carrito)
-        nombre=""
+        nombre=[]
         for i in carrito:
             print(i[1])
             why=text("SELECT nombre from producto WHERE id = :id")
-            nombre=db.execute(why,{"id":producto}).fetchall()
-        print(nombre)
+            nombe=db.execute(why,{"id":i[1]}).fetchone()
+            nombre.append(nombe[0])
         price = 0
         cantidades= 0
         for i in range(conteo):
@@ -236,7 +290,7 @@ def carrito():
         
         subtotal= cantidades*price
 
-        return render_template('carrito.html', nombre=nombre[0], muchos=conteo, carrito=carrito, subtotal=subtotal)
+        return render_template('carrito.html', nombre=nombre, muchos=conteo, carrito=carrito, subtotal=subtotal)
 
     else:
         
@@ -247,11 +301,12 @@ def carrito():
             flash("carrito vacio")
             return render_template("index.html")
 
-        nombre=""
+        nombre=[]
         for i in carrito:
             print(i[1])
             why=text("SELECT nombre from producto WHERE id = :id")
-            nombre=db.execute(why,{"id":i[1]}).fetchall()
+            nombe=db.execute(why,{"id":i[1]}).fetchone()
+            nombre.append(nombe[0])
 
         conteo = len(carrito)
         price = 0
@@ -262,7 +317,7 @@ def carrito():
         
         subtotal= cantidades*price
 
-        return render_template('carrito.html', nombre=nombre[0], muchos=conteo, carrito=carrito, subtotal=subtotal)
+        return render_template('carrito.html', nombre=nombre, muchos=conteo, carrito=carrito, subtotal=subtotal)
 
 
 @app.route("/venta", methods=['GET', 'POST'])
@@ -272,43 +327,102 @@ def venta():
         subtotal= int(request.form.get("subtotal"))
         impuesto=0.05
         descuento=0
-        totali= int(subtotal*impuesto+descuento) 
-        total=subtotal-totali
-        fecha_venta= hora  
-        
-        dato1=text("INSERT INTO venta (id_user, subtotal, total, descuento, fecha_venta) VALUES (:id, :subtotal, :total, :descuento, :fecha_venta)")
-        db.execute(dato1,
-                {"id": session["user_id"], "subtotal": subtotal, "total":total, "descuento":descuento, "fecha_venta":fecha_venta})
-
-        venta=text("SELECT id FROM venta WHERE id_user=:user")
-        id_venta=db.execute(venta,
-                            {"user":session["user_id"]}).fetchone()
+        fecha_venta= hora
 
         a = text("SELECT * FROM carrito WHERE id_user=:id")
         carrito = db.execute(a, {"id":str(session["user_id"])}).fetchall()
 
         conteo = len(carrito)
         for i in range(conteo):
-            monto_total= int(carrito[i][3]) * int(carrito[i][2])
+
+            mono_total = int(carrito[i][3]) * int(carrito[i][2])
+            print(mono_total)
+            monto_total = mono_total + int(round(mono_total * 0.5))
+            print(monto_total)
+
+            dato1=text("INSERT INTO venta (id_user, subtotal, total, descuento, fecha_venta) VALUES (:id, :subtotal, :total, :descuento, :fecha_venta)")
+            db.execute(dato1,
+                    {"id": session["user_id"], "subtotal": mono_total, "total":monto_total, "descuento":descuento, "fecha_venta":fecha_venta})
+
+
+        venta=text("SELECT id FROM venta WHERE id_user=:user")
+        id_venta=db.execute(venta,
+                            {"user":session["user_id"]}).fetchone()
+
+        for i in range(conteo):
+
+            mono_total = int(carrito[i][3]) * int(carrito[i][2])
+            monto_total = mono_total + int(round(mono_total * 0.5))
+
             dato1=text("INSERT INTO detalle_venta (id_producto, id_venta, cantidad, precio_unitario, monto_total) VALUES (:id_producto, :id_venta, :cantidad, :precio_unitario, :monto_total)")
             db.execute(dato1,
                         {"id_producto":int(carrito[i][1]), "id_venta":id_venta[0], "cantidad":int(carrito[i][3]), "precio_unitario":carrito[i][2], "monto_total":monto_total})
             db.commit()
 
-        return render_template("venta.html", subtotal=subtotal, impuesto=impuesto, fecha_venta=fecha_venta, descuento=descuento,total=total)
+        impuestos="5%"
+        monto=[]
+        nombre=[]
+        t0tal=[]
+        for i in carrito:
+            why=text("SELECT nombre from producto WHERE id = :id")
+            nombe=db.execute(why,{"id":i[1]}).fetchone()
+            nombre.append(nombe[0])
+
+            mono=int(i[3]) * int(i[2])
+            ttal=mono + int(round(mono * 0.5))
+            t0tal.append(ttal)
+            monto.append(mono)
+
+        f=text("SELECT fecha_venta FROM venta WHERE id_user=:id")
+        fecha=db.execute(f,{"id":session["user_id"]}).fetchall()
+
+        nosi=sum(t0tal)
+
+        return render_template("venta.html", conteo=conteo, producto=nombre, subtotal=monto, impuesto=impuestos, fecha_venta=fecha, descuento=descuento,total=t0tal, nosi=nosi)
     else:
         return redirect("/")
 
+@app.route("/pagar", methods=['POST'])
+def pagar():
+     
+    return render_template("pagar.html")
 
-    @app.route("/historial")
-    def detalle_venta():
-        producto=''
-        dato1=text("SELECT FROM id_venta FROM detalle_venta WHERE id_producto=:producto ")
-        id_venta=db.execute(dato1,
-                            {"producto":producto}).fetchone()
-        id_usurio=session["user_id"]
-        fecha= hora
+@app.route('/procesar-pago', methods=['POST'])
+def procesar_pago():
+    nombre_tarjeta = request.form.get('nombre-tarjeta')
+    numero_tarjeta = request.form.get('numero-tarjeta')
+    fecha_expiracion = request.form.get('fecha-expiracion')
+    direccion = request.form.get('direccion')
+    cvv = request.form.get('cvv')
 
-        dato1=text("INSERT INTO historial (id_venta, id_venta, id_usuario, fecha_historial) VALUES (:id_venta, :id_usuario, :fecha_historial)")
-        db.execute(dato1,
-                    {"id_venta":id_venta, ":id_usuario":id_usuario, "fecha_historial":fecha})
+    a=text("SELECT * FROM carrito WHERE id_user=:id")
+    carrito=db.execute(a,
+                    {"id":str(session["user_id"])}).fetchall()
+
+    cantidad_original=[]
+    cantidad=[]
+    for i in carrito:
+        canti=i[3]
+        cantidad.append(canti)
+        why=text("SELECT cantidad from producto WHERE id = :id")
+        cantidad=db.execute(why,{"id":int(i[1])}).fetchone()
+        cantidad_original.append(cantidad)
+        
+    print(cantidad_original)   
+
+    dato1=text("UPDATE producto SET cantidad = :cantidad WHERE id=:id")
+    db.execute(dato1, {"cantidad":cantidad, "id":id})
+    return f"Pago recibido. Tarjeta: {numero_tarjeta}, Nombre: {nombre_tarjeta}"
+
+
+@app.route("/historial")
+def historial():
+    producto=''
+    dato1=text("SELECT FROM id_venta FROM detalle_venta WHERE id_producto=:producto ")
+    id_venta=db.execute(dato1,
+                        {"producto":producto}).fetchone()
+    id_usurio=session["user_id"]
+    fecha= hora
+    dato1=text("INSERT INTO historial (id_venta, id_venta, id_usuario, fecha_historial) VALUES (:id_venta, :id_usuario, :fecha_historial)")
+    db.execute(dato1,
+                {"id_venta":id_venta, ":id_usuario":id_usuario, "fecha_historial":fecha})

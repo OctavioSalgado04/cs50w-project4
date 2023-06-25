@@ -25,6 +25,7 @@ $border:2px outset #7c7c7c;
 
 .body{
     background-color: rgb(255, 230, 0);
+    
 }
 
 .iniciar_session{
@@ -106,7 +107,7 @@ a:hover{
 
 }
 .register{
-    margin-top: 3.5em;
+    margin-top: 9em;
     background-color: #3376ce;
     border: 2px outset $color;
     border-radius: 8px;
@@ -151,4 +152,71 @@ a:hover{
 .resumin{
     @extend %letras;
     margin-left: 1rem;
+}
+.venta {
+    background-color: #3376ce;
+    margin-left: 10%;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 80%; /* ajusta el ancho según tus necesidades */
+    max-width: 100%; /* establece el ancho máximo */
+    padding: 20px;
+    text-align: center;
+}
+
+.table {
+    margin-top: 20px;
+    overflow-y: auto;
+    max-height: calc(100vh - 200px); /* Ajusta el valor 200px según tus necesidades */
+}
+.pago{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+
+  }
+  
+  .card {
+    left: 32%;
+    width: 400px;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    margin-top: 0;
+  }
+  
+  label, input {
+    display: block;
+    margin-bottom: 10px;
+  }
+.button{
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+  }  
+
+  
+
+@media screen and (max-width: 468px) {
+    /* ajusta los estilos para pantallas más pequeñas */
+    .venta {
+        margin-left: auto;
+        width: 90%;
+    }
+    .card {
+        width: 90%;
+      }
 }

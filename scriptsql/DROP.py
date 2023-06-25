@@ -11,8 +11,16 @@ db = scoped_session(sessionmaker(bind=engine))
 
 def main():
   
-    dato1=text("DROP TABLE ")
-    db.execute(dato1)
+    tabl4=text("""CREATE TABLE informacion_personal(
+    id SERIAL PRIMARY KEY,
+    id_user int not null,
+    usuario text NOT NULL,
+    direccion text NOT NULL,
+    url TEXT NOT NULL,
+    descripcion text NOT NULL
+    );
+    """)
+    db.execute(tabl4)
 
     db.commit()
 

@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+{% block title %}perfil{% endblock %}
+{% block content %}
+<div class="info">
+    <h1>foto de perfil</h1>
+    <img src="{{img}}" height="100rem">
+    <button type="submit" class="btn btn-outline-primary">cambiar</button>
+    <h1>nombre</h1>
+    <p>{{f}}</p> <button type="submit" class="btn btn-outline-primary">cambiar</button>
+    <h1>correo</h1>
+    <p>{correo}</p> <button type="submit" class="btn btn-outline-primary">cambiar</button>
+</div>
+
+{% endblock %}
