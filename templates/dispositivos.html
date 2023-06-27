@@ -1,99 +1,193 @@
 {% extends 'layout.html' %}
 {% block title %}dispositivos{% endblock %}
 {% block content %}
-<select class="form-select" aria-label="Default select example" onchange="select(this.value);">
-    <option selected disabled>¿Qué va a llevar?</option>
-    <option value="/arduino">Arduino</option>
-    <option value="/componentes">Componentes</option>
-    <option value="/dispositivos">Dispositivos</option>
-  </select>
-  <div class="container text-center">
-    <div class="row g-2">
-      <div class="col-6">
-        <div class="p-3">
-          <div class="card" style="width: 18rem;">
-            <img src="{{imagen[0][0]}}" class="card-img-top"  height="185em" alt="...">
-            <div class="card-body">
-              <p class="card-text">osciloscopio digital</p>
-              <li class="list-group-item">{{precio[0][0]}}C$</li>
-              {% if session.user_id %}
-                <li class="list-group-item">
-                  <div id="liveAlertPlaceholder"></div>
-                  <form action="/comprar" method="POST">
-                    <input type="hidden" name="name" value="osciloscopio digital">
-                    <input type="hidden" name="precio" value="{{precio[0][0]}}">
-                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
-                  </form>
-                </li>
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="p-3">
-          <div class="card" style="width: 18rem;">
-            <img src="{{imagen[1][0]}}" class="card-img-top"  height="185em" alt="...">
-            <div class="card-body">
-              <p class="card-text">multimetro fluke 115v</p>
-              <li class="list-group-item">{{precio[1][0]}}C$</li>
-              {% if session.user_id %}
-                <li class="list-group-item">
-                  <div id="liveAlertPlaceholder"></div>
-                  <form action="/comprar" method="POST">
-                    <input type="hidden" name="name" value="multimetro fulke 115v">
-                    <input type="hidden" name="precio" value="{{precio[1][0]}}">
-                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
-                  </form>
-                </li>
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="p-3">
-          <div class="card" style="width: 18rem;">
-            <img src="{{imagen[2][0]}}" class="card-img-top"  height="285em" alt="...">
-            <div class="card-body">
-              <p class="card-text">fuente ad y dc</p>
-              <li class="list-group-item">{{precio[2][0]}}C$</li>
-              {% if session.user_id %}
-                <li class="list-group-item">
-                  <div id="liveAlertPlaceholder"></div>
-                  <form action="/comprar" method="POST">
-                    <input type="hidden" name="name" value="fuente ad y dc">
-                    <input type="hidden" name="precio" value="{{precio[2][0]}}">
-                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
-                  </form>
-                </li>
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="p-3">
-          <div class="card" style="width: 18rem;">
-            <img src="{{imagen[3][0]}}" class="card-img-top"  height="285em" alt="...">
-            <div class="card-body">
-              <p class="card-text">analizador de espectro</p>
-              <li class="list-group-item">{{precio[3][0]}}C$</li>
-              {% if session.user_id %}
-                <li class="list-group-item">
-                  <div id="liveAlertPlaceholder"></div>
-                  <form action="/comprar" method="POST">
-                    <input type="hidden" name="name" value="analizador de espectro">
-                    <input type="hidden" name="precio" value="{{precio[3][0]}}">
-                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
-                  </form>
-                </li>
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      </div>
+
+<section class="section-sm">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="search-result bg-gray">
+					<h2>Resultados para "dispositivos"</h2>
+					<p>{{j}} Resultados {{fecha}}</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+				<div class="category-sidebar">
+					<div class="widget category-list">
+	<h4 class="widget-header">todas las categorias</h4>
+	<ul class="category-list">
+		<li><a href="/arduino">arduinos</a></li>
+		<li><a href="/dispositivos">dispositos</a></li>
+		<li><a href="/componentes">componentes</a></li>
+	</ul>
+</div>
+
+
+<div class="widget filter">
+	<h4 class="widget-header">productos</h4>
+  <form action="/comprar2" method="POST">
+	  <select name="producto" id="lang1">
+	  	<option value="" selected disabled>seleccione</option>
+	  	{% for i in nombre %}
+	  		<option value="{{i[0]}}">{{i[0]}}</option>
+	  	{% endfor %}
+	  </select>
+    <li class="list-group-item">
+      <div id="liveAlertPlaceholder"></div>
+      <button type="submit" class="btn btn-outline-secondary">comprar</button>
+    </li>
+  </form>
+</div>
+
+
+				</div>
+			</div>
+			<div class="col-md-9">
+				
+				<div class="product-grid-list">
+					<div class="row mt-30">
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="">
+				<img class="card-img-top" src="{{imagen[3][0]}}" height="200rem" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title"><a href="">{{nombre[3][0]}}</a></h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-folder-open-o"></i>osciloscopio</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-calendar"></i>26 de decembre</a>
+		    	</li>
+		    </ul>
+		   <p>El osciloscopio es una herramienta que muestra gráficamente las señales eléctricas en tiempo real. Permite medir y analizar la amplitud, forma de onda y frecuencia de las señales.</p>
+       {% if session.user_id %}
+       <li class="list-inline-item">
+         <form action="/comprar" method="POST">
+           <input type="hidden" name="name" value="{{nombre[3][0]}}">
+           <input type="hidden" name="precio" value="{{precio[3][0]}}">
+           <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+         </form>
+       </li>
+     {% endif %}
     </div>
-  </div>
+	</div>
+</div>
+
+						</div>
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="">
+				<img class="card-img-top" src="{{imagen[1][0]}}" height="200rem" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title"><a href="">{{nombre[1][0]}}</a></h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-folder-open-o"></i>{{nombre[1][0]}}</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-calendar"></i>26 de decembre</a>
+		    	</li>
+		    </ul>
+		   <p>es un dispositivo que proporciona corriente continua (DC) de manera constante y AC es un dispositivo que proporciona corriente alterna (AC). Suministra un voltaje que varía, cambiando su polaridad. </p>
+       {% if session.user_id %}
+       <li class="list-inline-item">
+         <form action="/comprar" method="POST">
+           <input type="hidden" name="name" value="{{nombre[1][0]}}">
+           <input type="hidden" name="precio" value="{{precio[1][0]}}">
+           <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+         </form>
+       </li>
+      {% endif %}
+		</div>
+	</div>
+</div>
+
+						</div>
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="">
+				<img class="card-img-top"  src="{{imagen[2][0]}}" height="200rem" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title"><a href="">{{nombre[2][0]}}</a></h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-folder-open-o"></i>{{nombre[2][0]}}</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-calendar"></i>26 de decembre</a>
+		    	</li>
+		    </ul>
+		   <p>es un instrumento utilizado para analizar y visualizar la distribución de frecuencias en una señal eléctrica. Permite descomponer una señal en frecuencia y amplitud en función de la frecuencia.</p>
+       {% if session.user_id %}
+       <li class="list-inline-item">
+         <form action="/comprar" method="POST">
+           <input type="hidden" name="name" value="{{nombre[2][0]}}">
+           <input type="hidden" name="precio" value="{{precio[2][0]}}">
+           <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+         </form>
+       </li>
+      {% endif %}
+		</div>
+	</div>
+</div>
+
+						</div>
+						
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="">
+				<img class="card-img-top" src="{{imagen[0][0]}}" height="200rem" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title"><a href="">{{nombre[0][0]}}</a></h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-folder-open-o"></i>{{nombre[0][0]}}</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-calendar"></i>26 de decembre</a>
+		    	</li>
+		    </ul>
+		   <p>es un multímetro digital fabricado por Fluke Corporation. Es un instrumento de medición versátil utilizado para realizar diversas mediciones eléctricas en aplicaciones de baja tensión.</p>
+       {% if session.user_id %}
+       <li class="list-inline-item">
+         <form action="/comprar" method="POST">
+           <input type="hidden" name="name" value="{{nombre[0][0]}}">
+           <input type="hidden" name="precio" value="{{precio[0][0]}}">
+           <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+         </form>
+       </li>
+      {% endif %}
+		</div>
+	</div>
+</div>
+
+</section>
   
 {% endblock %}

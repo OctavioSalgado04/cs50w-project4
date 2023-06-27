@@ -1,15 +1,6 @@
 {% extends 'layout.html' %}
 {% block title %}inicio{% endblock %}
 {% block content %}
-<div id="carouselExampleIndicators" class="carousel slide">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    <div>
-      simon
-  </div>
 {% with messages = get_flashed_messages() %}
         {% if messages %}
                 {% for message in messages %}
@@ -19,15 +10,101 @@
                 {% endfor %}
         {% endif %}
     {% endwith %}
-<div class="info">
-    <select class="form-select" aria-label="Default select example" onchange="select(this.value);">
-        <option selected disabled>¿Qué va a llevar?</option>
-        <option value="/arduino">Arduino</option>
-        <option value="/componentes">Componentes</option>
-        <option value="/dispositivos">Dispositivos</option>
-    </select>   
+    <section class="hero-area bg-1 text-center overly">
+        <!-- Container Start -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Header Contetnt -->
+                    <div class="content-block">
+                        <h1>tenemos todos los componentes, dispositivos y equipos electronicos que quieras </h1>
+                        <p>contamos con mas de 1000 componentes electronicos <br> en todos nuestros locales</p>
+                        
+                    </div>
+                    <!-- Advance Search -->
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Container End -->
+    </section>
     
+    <!--==========================================
+    =            All Category Section            =
+    ===========================================-->
     
-</div>
+    <section class=" section">
+        <!-- Container Start -->
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Section title -->
+                    <div class="section-title">
+                        <h2>todas nuestras categorias</h2>
+                        <p>en este espacio te haremos denotar todas nuestras productos disponibles y  nuestro carrito</p>
+                    </div>
+                    <div class="row">
+                        <!-- Category list -->
+                        <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+                            <div class="category-block">
+                                <div class="header">
+                                    <i class="fa fa-bars icon-bg-1"></i> 
+                                    <h4>arduinos</h4>
+                                </div>
+                                <ul class="category-list" >
+                                    <li><a href="/arduino">ver mas</a></li>
+                                </ul>
+                            </div>
+                        </div> <!-- /Category List -->
+                        <!-- Category list -->
+                        <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+                            <div class="category-block">
+                                <div class="header">
+                                    <i class="fa fa-microchip icon-bg-2"></i> 
+                                    <h4>componentes</h4>
+                                </div>
+                                <ul class="category-list" >
+                                    
+                                    <li><a href="/componentes">ver mas</span></a></li>
+
+                                </ul>
+                            </div>
+                        </div> <!-- /Category List -->
+                        <!-- Category list -->
+                        <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+                            <div class="category-block">
+                                <div class="header">
+                                    <i class="fa fa-lightbulb-o icon-bg-3"></i> 
+                                    <h4>dispositivos</h4>
+                                </div>
+                                <ul class="category-list" >
+                                    
+                                    <li><a href="/dispositivos">ver mas</a></li>
+
+                                </ul>
+                            </div>
+                        </div> <!-- /Category List -->
+                        <!-- Category list -->
+                        <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+                            <div class="category-block">
+                                <div class="header">
+                                    <i class="fa fa-shopping-cart icon-bg-4"></i> 
+                                    <h4>carrito</h4>
+                                </div>
+                                <ul class="category-list" >
+                                    <li><a href="/carrito">ver mas</a></li>
+                                </ul>
+                            </div>
+                        </div> <!-- /Category List -->
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Container End -->
+    </section>
+    
+  
 
 {% endblock %}

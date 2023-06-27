@@ -118,7 +118,7 @@ def main():
     db.execute(tabla0)
 
     tabl4=text("""CREATE TABLE informacion_personal(
-    id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,  
     id_user int not null,
     usuario text NOT NULL,
     direccion text NOT NULL,

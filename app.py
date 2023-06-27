@@ -23,6 +23,7 @@ db = scoped_session(sessionmaker(bind=engine))
 
 formato_hora = datetime.datetime.now()
 hora = formato_hora.strftime("el %d-%m-%Y a las %H:%M:%S")
+hora2 = formato_hora.strftime("el %d-%m-%Y")
 print(hora)
 
 def validar_correo(correo):
@@ -108,6 +109,10 @@ def register():
             session["user_id"] = row[0]
             session["usuario"]= row[1]
             session["img"]="/static/image/perfil.webp"
+
+            perfi=text("INSERT INTO informacion_personal (id_user, usuario, direccion, url, descripcion) VALUES(:id, :usuario, :direccion, :url, :descripcion)")
+            db.execute(perfil, {":id":row[0], "usuario":row[1], "direccion":'ninguna', "url":'/static/image/perfil.webp', "descripcion":'ninguna'})
+            db.commit()
             flash(f"ya ha sido registrado como {usuario}")
             return redirect("/")
 
@@ -127,9 +132,60 @@ def logout():
 @app.route("/perfil")
 @login_required
 def perfil():
-    f=session["usuario"]
-    img= session["img"]
-    return render_template("perfil.html", f=f, img=img)
+    mcr= text("SELECT correo FROM usuario WHERE id=:id")
+    correo= db.execute(mcr, {"id": session["user_id"]}).fetchone()
+
+    dato1= text("SELECT * from informacion_personal where id_user=:id")
+    info= db.execute(dato1, {"id":session["user_id"]}).fetchone()
+    print(info)
+    return render_template("perfil.html", f=info[2], img=info[4], correo=correo[0], direccion=info[3], descripcion=info[5])
+
+@app.route("/fotos")
+@login_required
+def nueva_foto():
+
+    return render_template("fotos.html")
+
+@app.route("/guardar_cambios", methods=['POST'])
+def guardar_cambios():
+    datos = request.get_json()
+    print(datos)
+    url = datos.get('urlFoto')
+    nombre = datos.get('nombre')
+    correo = datos.get('correo')
+    direccion = datos.get('direccion')
+    descripcion = datos.get('descripcion')
+    
+    if nombre:
+        print("el nombre")
+        nuevo_nombre= text ("UPDATE informacion_personal SET usuario=:nuevo WHERE id = :id")
+        db.execute(nuevo_nombre, { "nuevo": nombre,"id": session["user_id"]})
+        session["usuario"]=nombre
+    if correo:
+        print("el correo")
+        nuevo_correo= text ("UPDATE usuario SET correo=:nuevo WHERE id_user= :id")
+        db.execute(nuevo_correo, {"nuevo": correo,"id": session["user_id"]})
+    if direccion:
+        print("la direccion")
+        nuevo_direccion= text ("UPDATE informacion_personal SET direccion=:nuevo WHERE id_user= :id")
+        db.execute(nuevo_direccion, { "nuevo": direccion,"id": session["user_id"]})
+    if descripcion:
+        print("la descripcion")
+        nuevo_descripcion= text ("UPDATE informacion_personal SET descripcion=:nuevo WHERE id_user= :id")
+        db.execute(nuevo_descripcion, { "nuevo": descripcion,"id": session["user_id"]})
+    if url:
+        print("la foto")
+        session["img"]=url
+        nueva_foto= text ("UPDATE informacion_personal SET url=:nuevo WHERE id_user= :id")
+        db.execute(nueva_foto, { "nuevo": url,"id": session["user_id"]})
+        
+    else:
+        return redirect("/")
+    db.commit()
+
+    # Aquí puedes realizar las operaciones necesarias con los datos actualizados
+    flash('Cambios guardados')
+    return redirect("/")
 
 @app.route("/componentes")
 def componentes():
@@ -148,7 +204,12 @@ def componentes():
                             {"nombre":k}).fetchone()
         precio.append(precios[0])
 
-    return render_template("componentes.html", name=circles, precio=precio)
+    
+    j=0
+    for i in (nombre):
+        j+=1
+
+    return render_template("componentes.html", j=j,name=circles, precio=precio, fecha=hora2)
 
 
 @app.route("/dispositivos")
@@ -160,21 +221,36 @@ def dispositivos():
     #precios
     dato2=text("SELECT precio FROM producto WHERE id_categoria = '3'")
     precio=db.execute(dato2).fetchall()
+    #nombre
+    dato3=text("SELECT nombre FROM producto WHERE id_categoria = '3'")
+    nombre=db.execute(dato3).fetchall()
 
-    return render_template("dispositivos.html", imagen=imagen, precio=precio)
+    j=0
+    for i in (nombre):
+        j+=1
+
+    return render_template("dispositivos.html", imagen=imagen, precio=precio, nombre=nombre, j=j, fecha=hora2)
 
 
 @app.route("/arduino")
 def arduino():
     #arduinos
-    dato1=text("SELECT imagen, nombre FROM producto WHERE id_categoria = '1'")
+    dato1=text("SELECT imagen FROM producto WHERE id_categoria = '1'")
     imagen=db.execute(dato1).fetchall()
 
     #precios
     dato2=text("SELECT precio FROM producto WHERE id_categoria = '1'")
     precio=db.execute(dato2).fetchall()
+    
+    #nombre
+    dato3=text("SELECT nombre FROM producto WHERE id_categoria = '1'")
+    nombre=db.execute(dato3).fetchall()
 
-    return render_template("arduino.html",imagen=imagen, precio=precio)
+    j=0
+    for i in (nombre):
+        j+=1
+
+    return render_template("arduino.html", j=j,imagen=imagen, precio=precio, nombre=nombre,fecha=hora2)
 
 
 @app.route('/comprar', methods=['GET','POST'])
@@ -191,6 +267,20 @@ def comprar():
 
 
         return render_template('comprar.html', producto=producto, precio=precio, nombre=nombre, stock=stock[0])
+    else:
+        return redirect('/')
+
+@app.route('/comprar2', methods=['GET','POST'])
+def comprar2():
+    if request.method == "POST":
+        producto = request.form.get('producto')
+        print(producto)
+        dato1=text("SELECT cantidad, precio FROM producto WHERE nombre=:nombre")
+        stock=db.execute(dato1,
+                        {"nombre":producto}).fetchone()
+        print(stock)
+
+        return render_template('comprar.html', producto=producto, precio=stock[1],stock=stock[0])
     else:
         return redirect('/')
 
@@ -392,26 +482,28 @@ def procesar_pago():
     nombre_tarjeta = request.form.get('nombre-tarjeta')
     numero_tarjeta = request.form.get('numero-tarjeta')
     fecha_expiracion = request.form.get('fecha-expiracion')
-    direccion = request.form.get('direccion')
     cvv = request.form.get('cvv')
 
     a=text("SELECT * FROM carrito WHERE id_user=:id")
     carrito=db.execute(a,
                     {"id":str(session["user_id"])}).fetchall()
+    if carrito == None:
+        return redirect("/")
+    else:
+        for i in carrito:
+            print(i[0], i[3])
+            dato1=text("UPDATE producto SET cantidad = cantidad - :cantidad WHERE id=:id")
+            db.execute(dato1, {"cantidad":int(i[3]), "id":i[1]})
+            print("simon")
+            db.commit()
+    
+    deli=text("DELETE FROM carrito WHERE id_user=:id")
+    db.execute(deli, {"id":str(session["user_id"])})
 
-    cantidad_original=[]
-    cantidad=[]
-    for i in carrito:
-        canti=i[3]
-        cantidad.append(canti)
-        why=text("SELECT cantidad from producto WHERE id = :id")
-        cantidad=db.execute(why,{"id":int(i[1])}).fetchone()
-        cantidad_original.append(cantidad)
-        
-    print(cantidad_original)   
+    deli2=text("DELETE FROM venta WHERE id_user=:id")
+    db.execute(deli2, {"id":session["user_id"]})
+    db.commit()
 
-    dato1=text("UPDATE producto SET cantidad = :cantidad WHERE id=:id")
-    db.execute(dato1, {"cantidad":cantidad, "id":id})
     return f"Pago recibido. Tarjeta: {numero_tarjeta}, Nombre: {nombre_tarjeta}"
 
 

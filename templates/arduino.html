@@ -1,286 +1,482 @@
 {% extends 'layout.html' %}
 {% block title %}arduino{% endblock %}
 {% block content %}
-<select class="form-select" aria-label="Default select example" onchange="select(this.value);">
-    <option selected disabled>¿Qué va a llevar?</option>
-    <option value="/arduino">Arduino</option>
-    <option value="/componentes">Componentes</option>
-    <option value="/dispositivos">Dispositivos</option>
-  </select>
+<section class="section-sm">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="search-result bg-gray">
+					<h2>Resultados para "arduinos"</h2>
+					<p>{{j}} Resultados {{fecha}}</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+				<div class="category-sidebar">
+					<div class="widget category-list">
+	<h4 class="widget-header">todas las categorias</h4>
+	<ul class="category-list">
+		<li><a href="/arduino">arduinos</a></li>
+		<li><a href="/dispositivos">dispositos</a></li>
+		<li><a href="/componentes">componentes</a></li>
+	</ul>
+</div>
 
-  <div class="container text-center">
-    <div class="row g-2">
-      <div class="col-6">
-        <div class="p-3">
-          <div class="card" style="width: 18rem;">
-            <img src="{{imagen[0][0]}}" class="card-img-top" alt="...">
-            <div class="card-body">
-              <p class="card-text">{{imagen[0][1]}}</p>
-              <li class="list-group-item">{{precio[0][0]}}C$</li>
-              {% if session.user_id %}
-                <li class="list-group-item">
-                  <div id="liveAlertPlaceholder"></div>
-                  <form action="/comprar" method="POST">
-                    <input type="hidden" name="name" value="{{imagen[0][1]}}">
-                    <input type="hidden" name="precio" value="{{precio[0][0]}}">
-                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
-                  </form>
-                </li>
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="p-3">
-          <div class="card" style="width: 18rem;">
-            <img src="{{imagen[1][0]}}" class="card-img-top" alt="...">
-            <div class="card-body">
-              <p class="card-text">{{imagen[1][1]}}</p>
-              <li class="list-group-item">{{precio[1][0]}}C$</li>
-              {% if session.user_id %}
-                <li class="list-group-item">
-                  <div id="liveAlertPlaceholder"></div>
-                  <form action="/comprar" method="POST">
-                    <input type="hidden" name="name" value="{{imagen[1][1]}}">
-                    <input type="hidden" name="precio" value="{{precio[1][0]}}">
-                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
-                  </form>
-                </li>
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="p-3">
-          <div class="card" style="width: 18rem;">
-            <img src="{{imagen[2][0]}}" class="card-img-top" alt="...">
-            <div class="card-body">
-              <p class="card-text">{{imagen[2][1]}}</p>
-              <li class="list-group-item">{{precio[2][0]}}C$</li>
-              {% if session.user_id %}
-                <li class="list-group-item">
-                  <div id="liveAlertPlaceholder"></div>
-                  <form action="/comprar" method="POST">
-                    <input type="hidden" name="name" value="imagen[2][1]">
-                    <input type="hidden" name="precio" value="{{precio[2][0]}}">
-                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
-                  </form>
-                </li>
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="p-3">
-          <div class="card" style="width: 18rem;">
-            <img src="{{imagen[3][0]}}" class="card-img-top" alt="...">
-            <div class="card-body">
-              <p class="card-text">{{imagen[3][1]}}</p>
-              <li class="list-group-item">{{precio[3][0]}}C$</li>
-              {% if session.user_id %}
-                <li class="list-group-item">
-                  <div id="liveAlertPlaceholder"></div>
-                  <form action="/comprar" method="POST">
-                    <input type="hidden" name="name" value="{{imagen[3][1]}}">
-                    <input type="hidden" name="precio" value="{{precio[3][0]}}">
-                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
-                  </form>
-                </li>
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      </div>
+
+<div class="widget filter">
+	<h4 class="widget-header">productos</h4>
+  <form action="/comprar2" method="POST">
+	  <select name="producto" id="lang1">
+	  	<option value="" selected disabled>seleccione</option>
+	  	{% for i in nombre %}
+	  		<option value="{{i[0]}}">{{i[0]}}</option>
+	  	{% endfor %}
+	  </select>
+    <li class="list-group-item">
+      <div id="liveAlertPlaceholder"></div>
+      <button type="submit" class="btn btn-outline-secondary">comprar</button>
+    </li>
+  </form>
+</div>
+
+
+				</div>
+			</div>
+			<div class="col-md-9">
+				
+				<div class="product-grid-list">
+					<div class="row mt-30">
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="">
+				<img class="card-img-top" src="{{imagen[3][0]}}" height="200rem" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title"><a href="">{{nombre[3][0]}}</a></h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-folder-open-o"></i>osciloscopio</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-calendar"></i>26 de decembre</a>
+		    	</li>
+		    </ul>
+		   <p> es una placa de desarrollo basada en el microcontrolador Arduino y equipada con un módulo Ethernet, que permite la conexión a redes de área local (LAN) a través de un cable Ethernet.</p>
+       {% if session.user_id %}
+       <li class="list-inline-item">
+         <form action="/comprar" method="POST">
+           <input type="hidden" name="name" value="{{nombre[3][0]}}">
+           <input type="hidden" name="precio" value="{{precio[3][0]}}">
+           <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+         </form>
+       </li>
+     {% endif %}
     </div>
-  </div>
+	</div>
+</div>
 
+						</div>
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="">
+				<img class="card-img-top" src="{{imagen[1][0]}}" height="200rem" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title"><a href="">{{nombre[1][0]}}</a></h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-folder-open-o"></i>{{nombre[1][0]}}</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-calendar"></i>26 de decembre</a>
+		    	</li>
+		    </ul>
+		   <p>es una de las placas más populares y utilizadas. El Arduino Uno es un microcontrolador de prototipado rápido que proporciona una plataforma fácil de usar para realizar proyectos electrónicos.</p>
+       {% if session.user_id %}
+       <li class="list-inline-item">
+         <form action="/comprar" method="POST">
+           <input type="hidden" name="name" value="{{nombre[1][0]}}">
+           <input type="hidden" name="precio" value="{{precio[1][0]}}">
+           <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+         </form>
+       </li>
+      {% endif %}
+		</div>
+	</div>
+</div>
 
+						</div>
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="">
+				<img class="card-img-top"  src="{{imagen[2][0]}}" height="200rem" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title"><a href="">{{nombre[2][0]}}</a></h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-folder-open-o"></i>{{nombre[2][0]}}</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-calendar"></i>26 de decembre</a>
+		    	</li>
+		    </ul>
+		   <p>es una opción popular especialmente adecuado para proyectos que necesitan una mayor velocidad de procesamiento y una mayor capacidad de almacenamiento de datos.</p>
+       {% if session.user_id %}
+       <li class="list-inline-item">
+         <form action="/comprar" method="POST">
+           <input type="hidden" name="name" value="{{nombre[2][0]}}">
+           <input type="hidden" name="precio" value="{{precio[2][0]}}">
+           <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+         </form>
+       </li>
+      {% endif %}
+		</div>
+	</div>
+</div>
 
+						</div>
+						
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="">
+				<img class="card-img-top" src="{{imagen[0][0]}}" height="200rem" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title"><a href="">{{nombre[0][0]}}</a></h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-folder-open-o"></i>{{nombre[0][0]}}</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-calendar"></i>26 de decembre</a>
+		    	</li>
+		    </ul>
+		   <p>Esta placa se caracterizan por su tamaño compacto y sirve  para proyectos más especializados pero el espacio es limitado, lo que las hace ideales para aplicaciones donde el espacio y la eficiencia son importantes.</p>
+       {% if session.user_id %}
+       <li class="list-inline-item">
+         <form action="/comprar" method="POST">
+           <input type="hidden" name="name" value="{{nombre[0][0]}}">
+           <input type="hidden" name="precio" value="{{precio[0][0]}}">
+           <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+         </form>
+       </li>
+      {% endif %}
+		</div>
+	</div>
+</div>
 
+						</div>
+						
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="">
+				<img class="card-img-top" src="{{imagen[4][0]}}" height="200rem" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title"><a href="">{{nombre[4][0]}}</a></h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-folder-open-o"></i>{{nombre[4][0]}}</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-calendar"></i>26 de decembre</a>
+		    	</li>
+		    </ul>
+		   <p>es una placa de desarrollo de la familia Arduino que se destaca por su potencia y capacidad de procesamiento, ya que está basada en el microcontrolador SAM3X8E de 32 bits, que utiliza el núcleo ARM Cortex-M3.</p>
+       {% if session.user_id %}
+       <li class="list-inline-item">
+         <form action="/comprar" method="POST">
+           <input type="hidden" name="name" value="{{nombre[4][0]}}">
+           <input type="hidden" name="precio" value="{{precio[4][0]}}">
+           <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+         </form>
+       </li>
+      {% endif %}
+		</div>
+	</div>
+</div>
 
-  <div class="container text-center">
-    <div class="row g-2">
-      <div class="col-6">
-        <div class="p-3">
-          <div class="card" style="width: 18rem;">
-            <img src="{{imagen[4][0]}}" class="card-img-top" alt="...">
-            <div class="card-body">
-              <p class="card-text">{{imagen[4][1]}}</p>
-              <li class="list-group-item">{{precio[4][0]}}C$</li>
-              {% if session.user_id %}
-                <li class="list-group-item">
-                  <div id="liveAlertPlaceholder"></div>
-                  <form action="/comprar" method="POST">
-                    <input type="hidden" name="name" value="{{imagen[4][1]}}">
-                    <input type="hidden" name="precio" value="{{precio[4][0]}}">
-                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
-                  </form>
-                </li>
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="p-3">
-          <div class="card" style="width: 18rem;">
-            <img src="{{imagen[5][0]}}" class="card-img-top" alt="...">
-            <div class="card-body">
-              <p class="card-text">{{imagen[5][1]}}</p>
-              <li class="list-group-item">{{precio[5][0]}}C$</li>
-              {% if session.user_id %}
-                <li class="list-group-item">
-                  <div id="liveAlertPlaceholder"></div>
-                  <form action="/comprar" method="POST">
-                    <input type="hidden" name="name" value="{{imagen[5][1]}}">
-                    <input type="hidden" name="precio" value="{{precio[5][0]}}">
-                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
-                  </form>
-                </li>
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="p-3">
-          <div class="card" style="width: 18rem;">
-            <img src="{{imagen[6][0]}}" class="card-img-top" alt="...">
-            <div class="card-body">
-              <p class="card-text">{{imagen[6][1]}}</p>
-              <li class="list-group-item">{{precio[6][0]}}C$</li>
-              {% if session.user_id %}
-                <li class="list-group-item">
-                  <div id="liveAlertPlaceholder"></div>
-                  <form action="/comprar" method="POST">
-                    <input type="hidden" name="name" value="{{imagen[6][1]}}">
-                    <input type="hidden" name="precio" value="{{precio[6][0]}}">
-                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
-                  </form>
-                </li>
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="p-3">
-          <div class="card" style="width: 18rem;">
-            <img src="{{imagen[7][0]}}" class="card-img-top" alt="...">
-            <div class="card-body">
-              <p class="card-text">{{imagen[7][1]}}</p>
-              <li class="list-group-item">{{precio[7][0]}}C$</li>
-              {% if session.user_id %}
-                <li class="list-group-item">
-                  <div id="liveAlertPlaceholder"></div>
-                  <form action="/comprar" method="POST">
-                    <input type="hidden" name="name" value="{{imagen[7][1]}}">
-                    <input type="hidden" name="precio" value="{{precio[7][0]}}">
-                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
-                  </form>
-                </li>
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+						</div>
+						
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="">
+				<img class="card-img-top" src="{{imagen[5][0]}}" height="200rem" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title"><a href="">{{nombre[5][0]}}</a></h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-folder-open-o"></i>{{nombre[5][0]}}</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-calendar"></i>26 de decembre</a>
+		    	</li>
+		    </ul>
+		   <p>es una placa de desarrollo de la familia Arduino que se caracteriza por su gran cantidad de pines de entrada/salida (E/S) y su capacidad para manejar proyectos más complejos y de mayor escala.</p>
+       {% if session.user_id %}
+       <li class="list-inline-item">
+         <form action="/comprar" method="POST">
+           <input type="hidden" name="name" value="{{nombre[5][0]}}">
+           <input type="hidden" name="precio" value="{{precio[5][0]}}">
+           <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+         </form>
+       </li>
+      {% endif %}
+		</div>
+	</div>
+</div>
 
+						</div>
+						
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="">
+				<img class="card-img-top" src="{{imagen[6][0]}}" height="200rem" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title"><a href="">{{nombre[6][0]}}</a></h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-folder-open-o"></i>{{nombre[6][0]}}</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-calendar"></i>26 de decembre</a>
+		    	</li>
+		    </ul>
+		   <p>es una placa de desarrollo potente y versátil que ofrece una amplia gama de pines de E/S, capacidades de comunicación y compatibilidad con shields. Es ideal para proyectos que requieren una mayor cantidad de pines y funcionalidades avanzadas.</p>
+       {% if session.user_id %}
+       <li class="list-inline-item">
+         <form action="/comprar" method="POST">
+           <input type="hidden" name="name" value="{{nombre[6][0]}}">
+           <input type="hidden" name="precio" value="{{precio[6][0]}}">
+           <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+         </form>
+       </li>
+      {% endif %}
+		</div>
+	</div>
+</div>
 
+						</div>
+						
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="">
+				<img class="card-img-top" src="{{imagen[7][0]}}" height="200rem" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title"><a href="">{{nombre[7][0]}}</a></h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-folder-open-o"></i>{{nombre[7][0]}}</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-calendar"></i>26 de decembre</a>
+		    	</li>
+		    </ul>
+		   <p>es una placa de desarrollo de la familia Arduino que se destaca por su tamaño compacto y su capacidad de funcionar como una placa de desarrollo completa en un factor de forma reducido.  es especialmente adecuado para proyectos que requieren un tamaño compacto y portabilidad  </p>
+       {% if session.user_id %}
+       <li class="list-inline-item">
+         <form action="/comprar" method="POST">
+           <input type="hidden" name="name" value="{{nombre[7][0]}}">
+           <input type="hidden" name="precio" value="{{precio[7][0]}}">
+           <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+         </form>
+       </li>
+      {% endif %}
+		</div>
+	</div>
+</div>
 
+						</div>
+						
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="">
+				<img class="card-img-top" src="{{imagen[8][0]}}" height="200rem" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title"><a href="">{{nombre[8][0]}}</a></h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-folder-open-o"></i>{{nombre[8][0]}}</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-calendar"></i>26 de decembre</a>
+		    	</li>
+		    </ul>
+        <p>
+          es una placa de desarrollo de la familia Arduino que se caracteriza por su tamaño compacto y versatilidad es muy utilizado en proyectos donde el espacio es limitado. Está diseñado para ser una versión más pequeña y económica del Arduino Uno.
+		   </p>
+       {% if session.user_id %}
+       <li class="list-inline-item">
+         <form action="/comprar" method="POST">
+           <input type="hidden" name="name" value="{{nombre[8][0]}}">
+           <input type="hidden" name="precio" value="{{precio[8][0]}}">
+           <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+         </form>
+       </li>
+      {% endif %}
+		</div>
+	</div>
+</div>
 
+						</div>
+						
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="">
+				<img class="card-img-top" src="{{imagen[9][0]}}" height="200rem" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title"><a href="">{{nombre[9][0]}}</a></h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-folder-open-o"></i>{{nombre[9][0]}}</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-calendar"></i>26 de decembre</a>
+		    	</li>
+		    </ul>
+		   <p> es una placa de desarrollo de la familia Arduino diseñada específicamente para proyectos de electrónica usable (wearable). A diferencia de otras placas Arduino, el LilyPad tiene un factor de forma circular y está diseñado para ser cosido o integrado en textiles y prendas de vestir.</p>
+       {% if session.user_id %}
+       <li class="list-inline-item">
+         <form action="/comprar" method="POST">
+           <input type="hidden" name="name" value="{{nombre[9][0]}}">
+           <input type="hidden" name="precio" value="{{precio[9][0]}}">
+           <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+         </form>
+       </li>
+      {% endif %}
+		</div>
+	</div>
+</div>
 
-  <div class="container text-center">
-    <div class="row g-2">
-      <div class="col-6">
-        <div class="p-3">
-          <div class="card" style="width: 18rem;">
-            <img src="{{imagen[8][0]}}" class="card-img-top" alt="...">
-            <div class="card-body">
-              <p class="card-text">{{imagen[8][1]}}</p>
-              <li class="list-group-item">{{precio[8][0]}}C$</li>
-              {% if session.user_id %}
-                <li class="list-group-item">
-                  <div id="liveAlertPlaceholder"></div>
-                  <form action="/comprar" method="POST">
-                    <input type="hidden" name="name" value="{{imagen[8][1]}}">
-                    <input type="hidden" name="precio" value="{{precio[8][0]}}">
-                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
-                  </form>
-                </li>
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="p-3">
-          <div class="card" style="width: 18rem;">
-            <img src="{{imagen[9][0]}}" class="card-img-top" alt="...">
-            <div class="card-body">
-              <p class="card-text">{{imagen[9][1]}}</p>
-              <li class="list-group-item">{{precio[9][0]}}C$</li>
-              {% if session.user_id %}
-                <li class="list-group-item">
-                  <div id="liveAlertPlaceholder"></div>
-                  <form action="/comprar" method="POST">
-                    <input type="hidden" name="name" value="{{imagen[9][1]}}">
-                    <input type="hidden" name="precio" value="{{precio[9][0]}}">
-                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
-                  </form>
-                </li>
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="p-3">
-          <div class="card" style="width: 18rem;">
-            <img src="{{imagen[10][0]}}" class="card-img-top" alt="...">
-            <div class="card-body">
-              <p class="card-text">{{imagen[10][1]}}</p>
-              <li class="list-group-item">{{precio[10][0]}}C$</li>
-              {% if session.user_id %}
-                <li class="list-group-item">
-                  <div id="liveAlertPlaceholder"></div>
-                  <form action="/comprar" method="POST">
-                    <input type="hidden" name="name" value="{{imagen[10][1]}}">
-                    <input type="hidden" name="precio" value="{{precio[10][0]}}">
-                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
-                  </form>
-                </li>
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="p-3">
-          <div class="card" style="width: 18rem;">
-            <img src="{{imagen[11][0]}}" class="card-img-top" alt="...">
-            <div class="card-body">
-              <p class="card-text">{{imagen[11][1]}}</p>
-              <li class="list-group-item">{{precio[11][0]}}C$</li>
-              {% if session.user_id %}
-                <li class="list-group-item">
-                  <div id="liveAlertPlaceholder"></div>
-                  <form action="/comprar" method="POST">
-                    <input type="hidden" name="name" value="{{imagen[11][1]}}">
-                    <input type="hidden" name="precio" value="{{precio[11][0]}}">
-                    <button type="submit" class="btn btn-outline-secondary">Comprar</button>
-                  </form>
-                </li>
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+						</div>
+						
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="">
+				<img class="card-img-top" src="{{imagen[10][0]}}" height="200rem" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title"><a href="">{{nombre[10][0]}}</a></h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-folder-open-o"></i>{{nombre[10][0]}}</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-calendar"></i>26 de decembre</a>
+		    	</li>
+		    </ul>
+		   <p> es una placa de desarrollo todo en uno diseñada para facilitar la exploración y experimentación en el mundo de la electrónica y la programación. El Esplora viene con varios sensores y componentes integrados, lo que lo hace ideal para proyectos educativos y para aquellos que se están iniciando en Arduino.</p>
+       {% if session.user_id %}
+       <li class="list-inline-item">
+         <form action="/comprar" method="POST">
+           <input type="hidden" name="name" value="{{nombre[10][0]}}">
+           <input type="hidden" name="precio" value="{{precio[10][0]}}">
+           <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+         </form>
+       </li>
+      {% endif %}
+		</div>
+	</div>
+</div>
+
+						</div>
+						
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="">
+				<img class="card-img-top" src="{{imagen[11][0]}}" height="200rem" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title"><a href="">{{nombre[11][0]}}</a></h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-folder-open-o"></i>{{nombre[11][0]}}</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-calendar"></i>26 de decembre</a>
+		    	</li>
+		    </ul>
+		   <p>es una placa de desarrollo que se basa en el microcontrolador ATmega32U4. Destaca por su capacidad de emular un USB, lo que permite una amplia variedad de aplicaciones de interfaz humana. es adecuado para proyectos que requieren interacción directa con la computadora</p>
+       {% if session.user_id %}
+       <li class="list-inline-item">
+         <form action="/comprar" method="POST">
+           <input type="hidden" name="name" value="{{nombre[11][0]}}">
+           <input type="hidden" name="precio" value="{{precio[11][0]}}">
+           <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+         </form>
+       </li>
+      {% endif %}
+		</div>
+	</div>
+</div>
+
+</section>
 
 {% endblock %}

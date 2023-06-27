@@ -24,7 +24,7 @@ $letras: 2px 0 0 white,
 $border:2px outset #7c7c7c;
 
 .body{
-    background-color: rgb(255, 230, 0);
+    background-color: rgb(255, 255, 255);
     
 }
 
@@ -208,7 +208,11 @@ a:hover{
     width: 100%;
   }  
 
-  
+.foto-item {
+    display: inline-block;
+    margin-right: 10px;
+    text-align: center;
+  }
 
 @media screen and (max-width: 468px) {
     /* ajusta los estilos para pantallas más pequeñas */

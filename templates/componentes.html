@@ -2,476 +2,694 @@
 {% block title %}componentes{% endblock %}
 {% block content %}
 
-<div class="info">
-  <select class="form-select" aria-label="Default select example" onchange="select(this.value);">
-    <option selected disabled>¿Qué va a llevar?</option>
-    <option value="/arduino">Arduino</option>
-    <option value="/componentes">Componentes</option>
-    <option value="/dispositivos">Dispositivos</option>
-  </select>
-  <div class="container text-center">
-    <div class="row row-cols-4">
-      <div class="col">
-        <div class="card" style="width: 18rem;">
-          <img src="/static/image/lm78xx.png" class="card-img-top" height="285em">
-          <div class="card-body">
-            <h6 class="card-title">reguladores de voltajes fijos</h6>
-          </div>
-          <form action="/comprar" method="POST">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <select name="producto" id="lang1">
-                  <option value="" selected disabled>lm78xx</option>
-                  {% for i in name %}
-                    {% if i[0] == 'regulador de voltaje fijo' %}
-                      <option value="{{i[1]}}">{{i[1]}}</option>
-                    {% endif %}
-                  {% endfor %}
-                </select>
-              </li>
-              <li class="list-group-item">
-                <p>precio: {{precio[0]}}</p>
-                <input type="hidden" name="precio" value="{{precio[0]}}">
-                <input type="hidden" name="name" value="{{name[0][0]}}">
-              </li>
-              {% if session.user_id %}
-                <li class="list-group-item">
-                  <div id="liveAlertPlaceholder"></div>
-                  <button type="submit" class="btn btn-outline-secondary">comprar</button>
-                </li>
-              {% endif %}
-            </ul>
-          </form>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card" style="width: 18rem;">
-          <img src="/static/image/OIP.jpeg" class="card-img-top" height="285em">
-          <div class="card-body">
-            <h6 class="card-title">temporizadores IC</h6>
-          </div>
-          <form action="/comprar" method="POST">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <select name="producto" id="lang2">
-                  <option value="" selected disabled>ltxxx</option>
-                  {% for i in name %}
-                    {% if i[0] == 'temporizador IC' %}
-                      <option value="{{i[1]}}">{{i[1]}}</option>
-                    {% endif %}
-                  {% endfor %}
-                </select>
-              </li>
-              <li class="list-group-item">
-                <p>precio:{{precio[1]}}</p>
-                <input type="hidden" name="precio" value="{{precio[1]}}">
+
+<section class="section-sm">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="search-result bg-gray">
+					<h2>Resultados para "componentes"</h2>
+					<p>{{j}} Resultados {{fecha}}</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+				<div class="category-sidebar">
+					<div class="widget category-list">
+	<h4 class="widget-header">todas las categorias</h4>
+	<ul class="category-list">
+		<li><a href="/arduino">arduinos</a></li>
+		<li><a href="/dispositivos">dispositos</a></li>
+		<li><a href="/componentes">componentes</a></li>
+	</ul>
+</div>
+
+
+				</div>
+			</div>
+			<div class="col-md-9">
+				
+				<div class="product-grid-list">
+					<div class="row mt-30">
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="">
+				<img class="card-img-top" src="/static/image/lm78xx.png" height="180rem" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title">reguladores de voltajes fijos</h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-folder-open-o"></i>reguladores de voltajes fijos</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-calendar"></i>26 de decembre</a>
+		    	</li>
+		    </ul>
+		   <form action="/comprar" method="POST">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <select name="producto" id="lang1">
+              <option value="" selected disabled>lm78xx</option>
+              {% for i in name %}
+                {% if i[0] == 'regulador de voltaje fijo' %}
+                  <option value="{{i[1]}}">{{i[1]}}</option>
+                {% endif %}
+              {% endfor %}
+            </select>
+          </li>
+          <li class="list-group-item">
+            <p>precio: {{precio[0]}}</p>
+            <input type="hidden" name="precio" value="{{precio[0]}}">
+            <input type="hidden" name="name" value="{{name[0][0]}}">
+          </li>
+          {% if session.user_id %}
+            <li class="list-group-item">
+              <div id="liveAlertPlaceholder"></div>
+              <button type="submit" class="btn btn-outline-secondary">comprar</button>
+            </li>
+          {% endif %}
+        </ul>
+      </form>
+    </div>
+	</div>
+</div>
+
+						</div>
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="">
+				<img class="card-img-top" src="/static/image/OIP.jpeg" height="200rem" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title">temporizadores IC</h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-folder-open-o"></i>temporizadores IC</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-calendar"></i>26 de decembre</a>
+		    	</li>
+		    </ul>
+        <form action="/comprar" method="POST">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <select name="producto" id="lang1">
+                <option value="" selected disabled>lm78xx</option>
+                {% for i in name %}
+                  {% if i[0] == 'temporizador IC' %}
+                    <option value="{{i[1]}}">{{i[1]}}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+            </li>
+            <li class="list-group-item">
+              <p>precio: {{precio[0]}}</p>
+              <input type="hidden" name="precio" value="{{precio[1]}}">
                 {% for i in name %}
                     {% if i[0] == 'temporizador IC' %}
                       <input type="hidden" name="name" value="{{i[0]}}">
                 {% endif %}
                   {% endfor %}
-              </li>
-              {% if session.user_id %}
-                <li class="list-group-item">
-                  <div id="liveAlertPlaceholder"></div>
-                  <button type="submit" class="btn btn-outline-secondary">comprar</button>
-                </li>
-              {% endif %}
-            </ul>
-          </form>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card" style="width: 18rem;">
-          <img src="/static/image/lm3xxx.jpg" class="card-img-top" height="285em">
-          <div class="card-body">
-            <h6 class="card-title">amplificador operacional</h6>
-          </div>
-          <form action="/comprar" method="POST">
-            <ul class="list-group list-group-flush">
+            </li>
+            {% if session.user_id %}
               <li class="list-group-item">
-                <select name="producto" id="lang3">
-                  <option value="" selected disabled>lm3xxx</option>
-                  {% for i in name %}
-                    {% if i[0] == 'amplificador operacional' %}
-                    <option value="{{i[1]}}">{{i[1]}}</option>
-                    {% endif %}
-                  {% endfor %}
-                </select>
+                <div id="liveAlertPlaceholder"></div>
+                <button type="submit" class="btn btn-outline-secondary">comprar</button>
               </li>
-              <li class="list-group-item">
-                <p>precio:{{precio[2]}}</p>
-                <input type="hidden" name="precio" value="{{precio[2]}}">
-                {% for i in name %}
-                    {% if i[0] == 'amplificador operacional' %}
-                    <input type="hidden" name="name" value="{{i[0]}}">
-                    {% endif %}
-                  {% endfor %}
-              </li>
-              {% if session.user_id %}
-                <li class="list-group-item">
-                  <div id="liveAlertPlaceholder"></div>
-                  <button type="submit" class="btn btn-outline-secondary">comprar</button>
-                </li>
-              {% endif %}
-            </ul>
-          </form>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card" style="width: 18rem;">
-          <img src="/static/image/R.jpeg" class="card-img-top" height="285em">
-          <div class="card-body">
-            <h6 class="card-title">regulador de voltaje ajustable</h6>
-          </div>
-          <form action="/comprar" method="POST">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <select name="producto" id="lang4">
-                  <option value="" selected disabled>lm3xx</option>
-                  {% for i in name %}
-                    {% if i[0] == 'regulador de voltaje ajustable' %}
-                    <option value="{{i[1]}}">{{i[1]}}</option>
-                    {% endif %}
-                  {% endfor %}
-                </select>
-              </li>
-              <li class="list-group-item">
-                <p>precio:{{precio[3]}}</p>
-                <input type="hidden" name="precio" value="{{precio[3]}}">
-                {% for i in name %}
-                    {% if i[0] == 'regulador de voltaje ajustable' %}
-                    <input type="hidden" name="name" value="{{i[0]}}">
-                    {% endif %}
-                  {% endfor %}
-              </li>
-              {% if session.user_id %}
-                <li class="list-group-item">
-                  <div id="liveAlertPlaceholder"></div>
-                  <button type="submit" class="btn btn-outline-secondary">comprar</button>
-                </li>
-              {% endif %}
-            </ul>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <div class="separo">
-  </div>
-
-  <div class="container text-center">
-    <div class="row row-cols-4">
-      <div class="col">
-        <div class="card" style="width: 18rem;">
-          <img src="/static/image/R (1).jpeg" class="card-img-top" height="265em">
-          <div class="card-body">
-            <h6 class="card-title">amplificador de audio de bajo voltaje</h6>
-          </div>
-          <form action="/comprar" method="POST">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <select name="producto" id="lang1">
-                  <option value="" selected disabled>lm3xxx</option>
-                  {% for i in name %}
-                    {% if i[0] == 'amplificador de audio de bajo voltaje' %}
-                      <option value="{{i[1]}}">{{i[1]}}</option>
-                    {% endif %}
-                  {% endfor %}
-                </select>
-              </li>
-              <li class="list-group-item">
-                <p>precio:{{precio[4]}}</p>
-                <input type="hidden" name="precio" value="{{precio[4]}}">
-                {% for i in name %}
-                    {% if i[0] == 'amplificador de audio de bajo voltaje' %}
-                    <input type="hidden" name="name" value="{{i[0]}}">
-                    {% endif %}
-                  {% endfor %}
-              </li>
-              {% if session.user_id %}
-                <li class="list-group-item">
-                  <div id="liveAlertPlaceholder"></div>
-                  <button type="submit" class="btn btn-outline-secondary">comprar</button>
-                </li>
-              {% endif %}
-            </ul>
-          </form>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card" style="width: 18rem;">
-          <img src="/static/image/R (2).jpeg" class="card-img-top" height="285em">
-          <div class="card-body">
-            <h6 class="card-title">resistencias</h6>
-          </div>
-          <form action="/comprar" method="POST">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <select name="producto" id="lang2">
-                  <option value="" selected disabled>cuatro bandas</option>
-                  {% for i in name %}
-                    {% if i[0] == 'resistencias' %}
-                      <option value="{{i[1]}}">{{i[1]}}</option>
-                    {% endif %}
-                  {% endfor %}
-                </select>
-              </li>
-              <li class="list-group-item">
-                <p>precio:{{precio[5]}}</p>
-                <input type="hidden" name="precio" value="{{precio[5]}}">
-                {% for i in name %}
-                    {% if i[0] == 'resistencias' %}
-                    <input type="hidden" name="name" value="{{i[0]}}">
-                    {% endif %}
-                  {% endfor %}
-              </li>
-              {% if session.user_id %}
-                <li class="list-group-item">
-                  <div id="liveAlertPlaceholder"></div>
-                  <button type="submit" class="btn btn-outline-secondary">comprar</button>
-                </li>
-              {% endif %}
-            </ul>
-          </form>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card" style="width: 18rem;">
-          <img src="/static/image/trans.png" class="card-img-top" height="285em">
-          <div class="card-body">
-            <h6 class="card-title">transistor bipolar PNP</h6>
-          </div>
-          <form action="/comprar" method="POST">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <select name="producto" id="lang3">
-                  <option value="" selected disabled>2nxxx</option>
-                  {% for i in name %}
-                    {% if i[0] == 'PNP transistores bipolares' %}
-                      <option value="{{i[1]}}">{{i[1]}}</option>
-                    {% endif %}
-                  {% endfor %}
-                </select>
-              </li>
-              <li class="list-group-item">
-                <p>precio:{{precio[6]}}</p>
-                <input type="hidden" name="precio" value="{{precio[6]}}">
-                {% for i in name %}
-                    {% if i[0] == 'PNP transistores bipolares' %}
-                    <input type="hidden" name="name" value="{{i[0]}}">
-                    {% endif %}
-                  {% endfor %}
-              </li>
-              {% if session.user_id %}
-                <li class="list-group-item">
-                  <div id="liveAlertPlaceholder"></div>
-                  <button type="submit" class="btn btn-outline-secondary">comprar</button>
-                </li>
-              {% endif %}
-            </ul>
-          </form>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card" style="width: 18rem;">
-          <img src="/static/image/fet.jpeg" class="card-img-top" height="265em">
-          <div class="card-body">
-            <h6 class="card-title">(FET)transistores de efecto de campo</h6>
-          </div>
-          <form action="/comprar" method="POST">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <select name="producto" id="lang4">
-                  <option value="" selected disabled>jxxx</option>
-                  {% for i in name %}
-                    {% if i[0] == '(FET)transistores de efecto de campo' %}
-                      <option value="{{i[1]}}">{{i[1]}}</option>
-                    {% endif %}
-                  {% endfor %}
-                </select>
-              </li>
-              <li class="list-group-item">
-                <p>precio:{{precio[7]}}</p>
-                <input type="hidden" name="precio" value="{{precio[7]}}">
-                {% for i in name %}
-                    {% if i[0] == '(FET)transistores de efecto de campo' %}
-                    <input type="hidden" name="name" value="{{i[0]}}">
-                    {% endif %}
-                  {% endfor %}
-              </li>
-              {% if session.user_id %}
-                <li class="list-group-item">
-                  <div id="liveAlertPlaceholder"></div>
-                  <button type="submit" class="btn btn-outline-secondary">comprar</button>
-                </li>
-              {% endif %}
-            </ul>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-
-  <div class="separo">
-  </div>
-
-  <div class="container text-center">
-    <div class="row row-cols-4">
-      <div class="col">
-        <div class="card" style="width: 18rem;">
-          <img src="/static/image/trans.png" class="card-img-top">
-          <div class="card-body">
-            <h6 class="card-title">transistores darlington</h6>
-          </div>
-          <form action="/comprar" method="POST">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <select name="producto" id="lang1">
-                  <option value="" selected disabled>tipxx</option>
-                  {% for i in name %}
-                    {% if i[0] == 'transistores darlington' %}
-                      <option value="{{i[1]}}">{{i[1]}}</option>
-                    {% endif %}
-                  {% endfor %}
-                </select>
-              </li>
-              <li class="list-group-item">
-                <p>precio:{{precio[8]}}</p>
-                <input type="hidden" name="precio" value="{{precio[8]}}">
-                {% for i in name %}
-                    {% if i[0] == 'transistores darlington' %}
-                    <input type="hidden" name="name" value="{{i[0]}}">
-                    {% endif %}
-                  {% endfor %}
-              </li>
-              {% if session.user_id %}
-                <li class="list-group-item">
-                  <div id="liveAlertPlaceholder"></div>
-                  <button type="submit" class="btn btn-outline-secondary">comprar</button>
-                </li>
-              {% endif %}
-            </ul>
-          </form>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card" style="width: 18rem;">
-          <img src="/static/image/bjt.jpeg" class="card-img-top" height="265em">
-          <div class="card-body">
-            <h6 class="card-title">(BJT)transistores de potencias bipolares</h6>
-          </div>
-          <form action="/comprar" method="POST">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <select name="producto" id="lang2">
-                  <option value="" selected disabled>tipxxx</option>
-                  {% for i in name %}
-                    {% if i[0] == '(BJT)transistores de potencias bipolares' %}
-                      <option value="{{i[1]}}">{{i[1]}}</option>
-                    {% endif %}
-                  {% endfor %}
-                </select>
-              </li>
-              <li class="list-group-item">
-                <p>precio:{{precio[9]}}</p>
-                <input type="hidden" name="precio" value="{{precio[9]}}">
-                {% for i in name %}
-                    {% if i[0] == '(BJT)transistores de potencias bipolares' %}
-                    <input type="hidden" name="name" value="{{i[0]}}">
-                    {% endif %}
-                  {% endfor %}
-              </li>
-              {% if session.user_id %}
-                <li class="list-group-item">
-                  <div id="liveAlertPlaceholder"></div>
-                  <button type="submit" class="btn btn-outline-secondary">comprar</button>
-                </li>
-              {% endif %}
-            </ul>
-          </form>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card" style="width: 18rem;">
-          <img src="/static/image/jfet.jpeg" class="card-img-top" height="265em">
-          <div class="card-body">
-            <h6 class="card-title">(JFET)transistores de union de campo</h6>
-          </div>
-          <form action="/comprar" method="POST">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <select name="producto" id="lang3">
-                  <option value="" selected disabled>irfxx</option>
-                  {% for i in name %}
-                    {% if i[0] == '(JFET)transistores de union de campo' %}
-                      <option value="{{i[1]}}">{{i[1]}}</option>
-                    {% endif %}
-                  {% endfor %}
-                </select>
-              </li>
-              <li class="list-group-item">
-                <p>precio:{{precio[10]}}</p>
-                <input type="hidden" name="precio" value="{{precio[10]}}">
-                {% for i in name %}
-                    {% if i[0] == '(JFET)transistores de union de campo' %}
-                      <input type="hidden" name="name" value="{{i[0]}}">
-                    {% endif %}
-                  {% endfor %}
-              </li>
-              {% if session.user_id %}
-                <li class="list-group-item">
-                  <div id="liveAlertPlaceholder"></div>
-                  <button type="submit" class="btn btn-outline-secondary">comprar</button>
-                </li>
-              {% endif %}
-            </ul>
-          </form>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card" style="width: 18rem;">
-          <img src="/static/image/mosfet.jpeg" class="card-img-top" height="285em">
-          <div class="card-body">
-            <h6 class="card-title">MOSFET de potencia</h6>
-          </div>
-          <form action="/comprar" method="POST">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <select name="producto" id="lang4">
-                  <option value="" selected disabled>irfxx</option>
-                  {% for i in name %}
-                    {% if i[0] == 'MOSFET de potencia' %}
-                      <option value="{{i[1]}}">{{i[1]}}</option>
-                    {% endif %}
-                  {% endfor %}
-                </select>
-              </li>
-              <li class="list-group-item">
-                <p>precio:{{precio[11]}}</p>
-                <input type="hidden" name="precio" value="{{precio[11]}}">
-                {% for i in name %}
-                    {% if i[0] == 'MOSFET de potencia' %}
-                    <input type="hidden" name="name" value="{{i[0]}}">
-                    {% endif %}
-                  {% endfor %}
-              </li>
-              {% if session.user_id %}
-                <li class="list-group-item">
-                  <div id="liveAlertPlaceholder"></div>
-                  <button type="submit" class="btn btn-outline-secondary">comprar</button>
-                </li>
-              {% endif %}
-            </ul>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-
+            {% endif %}
+          </ul>
+        </form>
+		</div>
+	</div>
 </div>
+
+						</div>
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="">
+				<img class="card-img-top"  src="/static/image/lm3xxx.jpg" height="200rem" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title"><a href="">amplificador operacional</a></h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-folder-open-o"></i>amplificador operacional</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-calendar"></i>26 de decembre</a>
+		    	</li>
+		    </ul>
+        <form action="/comprar" method="POST">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <select name="producto" id="lang3">
+                <option value="" selected disabled>lm3xxx</option>
+                {% for i in name %}
+                  {% if i[0] == 'amplificador operacional' %}
+                  <option value="{{i[1]}}">{{i[1]}}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+            </li>
+            <li class="list-group-item">
+              <p>precio:{{precio[2]}}</p>
+              <input type="hidden" name="precio" value="{{precio[2]}}">
+              {% for i in name %}
+                  {% if i[0] == 'amplificador operacional' %}
+                  <input type="hidden" name="name" value="{{i[0]}}">
+                  {% endif %}
+                {% endfor %}
+            </li>
+            {% if session.user_id %}
+              <li class="list-group-item">
+                <div id="liveAlertPlaceholder"></div>
+                <button type="submit" class="btn btn-outline-secondary">comprar</button>
+              </li>
+            {% endif %}
+          </ul>
+        </form>
+		</div>
+	</div>
+</div>
+
+						</div>
+						
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="">
+				<img class="card-img-top" src="/static/image/R.jpeg" height="200rem" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title">regulador de voltaje ajustable</h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-folder-open-o"></i>regulador de voltaje ajustable</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-calendar"></i>26 de decembre</a>
+		    	</li>
+		    </ul>
+        <form action="/comprar" method="POST">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <select name="producto" id="lang4">
+                <option value="" selected disabled>lm3xx</option>
+                {% for i in name %}
+                  {% if i[0] == 'regulador de voltaje ajustable' %}
+                  <option value="{{i[1]}}">{{i[1]}}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+            </li>
+            <li class="list-group-item">
+              <p>precio:{{precio[3]}}</p>
+              <input type="hidden" name="precio" value="{{precio[3]}}">
+              {% for i in name %}
+                  {% if i[0] == 'regulador de voltaje ajustable' %}
+                  <input type="hidden" name="name" value="{{i[0]}}">
+                  {% endif %}
+                {% endfor %}
+            </li>
+            {% if session.user_id %}
+              <li class="list-group-item">
+                <div id="liveAlertPlaceholder"></div>
+                <button type="submit" class="btn btn-outline-secondary">comprar</button>
+              </li>
+            {% endif %}
+          </ul>
+        </form>
+		</div>
+	</div>
+</div>
+
+
+						</div>
+						
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="">
+				<img class="card-img-top" src="/static/image/R (1).jpeg" height="180rem" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title">amplificador de audio de bajo voltaje</h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-folder-open-o"></i>amplificador de audio de bajo voltaje</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-calendar"></i>26 de decembre</a>
+		    	</li>
+		    </ul>
+        <form action="/comprar" method="POST">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <select name="producto" id="lang1">
+                <option value="" selected disabled>lm3xxx</option>
+                {% for i in name %}
+                  {% if i[0] == 'amplificador de audio de bajo voltaje' %}
+                    <option value="{{i[1]}}">{{i[1]}}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+            </li>
+            <li class="list-group-item">
+              <p>precio:{{precio[4]}}</p>
+              <input type="hidden" name="precio" value="{{precio[4]}}">
+              {% for i in name %}
+                  {% if i[0] == 'amplificador de audio de bajo voltaje' %}
+                  <input type="hidden" name="name" value="{{i[0]}}">
+                  {% endif %}
+                {% endfor %}
+            </li>
+            {% if session.user_id %}
+              <li class="list-group-item">
+                <div id="liveAlertPlaceholder"></div>
+                <button type="submit" class="btn btn-outline-secondary">comprar</button>
+              </li>
+            {% endif %}
+          </ul>
+        </form>
+		</div>
+	</div>
+</div>
+
+						</div>
+						
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="">
+				<img class="card-img-top" src="/static/image/R (2).jpeg" height="220rem" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title">resistencias</h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-folder-open-o"></i>resistencias</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-calendar"></i>26 de decembre</a>
+		    	</li>
+		    </ul>
+        <form action="/comprar" method="POST">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <select name="producto" id="lang2">
+                <option value="" selected disabled>cuatro bandas</option>
+                {% for i in name %}
+                  {% if i[0] == 'resistencias' %}
+                    <option value="{{i[1]}}">{{i[1]}}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+            </li>
+            <li class="list-group-item">
+              <p>precio:{{precio[5]}}</p>
+              <input type="hidden" name="precio" value="{{precio[5]}}">
+              {% for i in name %}
+                  {% if i[0] == 'resistencias' %}
+                  <input type="hidden" name="name" value="{{i[0]}}">
+                  {% endif %}
+                {% endfor %}
+            </li>
+            {% if session.user_id %}
+              <li class="list-group-item">
+                <div id="liveAlertPlaceholder"></div>
+                <button type="submit" class="btn btn-outline-secondary">comprar</button>
+              </li>
+            {% endif %}
+          </ul>
+        </form>
+		</div>
+	</div>
+</div>
+
+
+						</div>
+						
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="">
+				<img class="card-img-top" src="/static/image/trans.png" height="230rem" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title">transistor bipolar PNP</h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-folder-open-o"></i>transistor</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-calendar"></i>26 de decembre</a>
+		    	</li>
+		    </ul>
+        <form action="/comprar" method="POST">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <select name="producto" id="lang3">
+                <option value="" selected disabled>2nxxx</option>
+                {% for i in name %}
+                  {% if i[0] == 'PNP transistores bipolares' %}
+                    <option value="{{i[1]}}">{{i[1]}}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+            </li>
+            <li class="list-group-item">
+              <p>precio:{{precio[6]}}</p>
+              <input type="hidden" name="precio" value="{{precio[6]}}">
+              {% for i in name %}
+                  {% if i[0] == 'PNP transistores bipolares' %}
+                  <input type="hidden" name="name" value="{{i[0]}}">
+                  {% endif %}
+                {% endfor %}
+            </li>
+            {% if session.user_id %}
+              <li class="list-group-item">
+                <div id="liveAlertPlaceholder"></div>
+                <button type="submit" class="btn btn-outline-secondary">comprar</button>
+              </li>
+            {% endif %}
+          </ul>
+        </form>
+		</div>
+	</div>
+</div>
+
+						</div>
+						
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="">
+				<img class="card-img-top" src="/static/image/fet.jpeg" height="180rem" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title">(FET)transistores de efecto de campo</h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-folder-open-o"></i>transistores</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-calendar"></i>26 de decembre</a>
+		    	</li>
+		    </ul>
+        <form action="/comprar" method="POST">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <select name="producto" id="lang4">
+                <option value="" selected disabled>jxxx</option>
+                {% for i in name %}
+                  {% if i[0] == '(FET)transistores de efecto de campo' %}
+                    <option value="{{i[1]}}">{{i[1]}}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+            </li>
+            <li class="list-group-item">
+              <p>precio:{{precio[7]}}</p>
+              <input type="hidden" name="precio" value="{{precio[7]}}">
+              {% for i in name %}
+                  {% if i[0] == '(FET)transistores de efecto de campo' %}
+                  <input type="hidden" name="name" value="{{i[0]}}">
+                  {% endif %}
+                {% endfor %}
+            </li>
+            {% if session.user_id %}
+              <li class="list-group-item">
+                <div id="liveAlertPlaceholder"></div>
+                <button type="submit" class="btn btn-outline-secondary">comprar</button>
+              </li>
+            {% endif %}
+          </ul>
+        </form>
+		</div>
+	</div>
+</div>
+
+
+						</div>
+						
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="">
+				<img class="card-img-top" src="/static/image/trans.png" height="200rem" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title">transistores darlington</h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-folder-open-o"></i>transistores</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-calendar"></i>26 de decembre</a>
+		    	</li>
+		    </ul>
+        <form action="/comprar" method="POST">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <select name="producto" id="lang1">
+                <option value="" selected disabled>tipxx</option>
+                {% for i in name %}
+                  {% if i[0] == 'transistores darlington' %}
+                    <option value="{{i[1]}}">{{i[1]}}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+            </li>
+            <li class="list-group-item">
+              <p>precio:{{precio[8]}}</p>
+              <input type="hidden" name="precio" value="{{precio[8]}}">
+              {% for i in name %}
+                  {% if i[0] == 'transistores darlington' %}
+                  <input type="hidden" name="name" value="{{i[0]}}">
+                  {% endif %}
+                {% endfor %}
+            </li>
+            {% if session.user_id %}
+              <li class="list-group-item">
+                <div id="liveAlertPlaceholder"></div>
+                <button type="submit" class="btn btn-outline-secondary">comprar</button>
+              </li>
+            {% endif %}
+          </ul>
+        </form>
+		</div>
+	</div>
+</div>
+
+
+						</div>
+						
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="">
+				<img class="card-img-top" src="/static/image/bjt.jpeg" height="200rem" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title">(BJT)transistores de potencias bipolares</h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-folder-open-o"></i>transistores</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-calendar"></i>26 de decembre</a>
+		    	</li>
+		    </ul>
+        <form action="/comprar" method="POST">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <select name="producto" id="lang2">
+                <option value="" selected disabled>tipxxx</option>
+                {% for i in name %}
+                  {% if i[0] == '(BJT)transistores de potencias bipolares' %}
+                    <option value="{{i[1]}}">{{i[1]}}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+            </li>
+            <li class="list-group-item">
+              <p>precio:{{precio[9]}}</p>
+              <input type="hidden" name="precio" value="{{precio[9]}}">
+              {% for i in name %}
+                  {% if i[0] == '(BJT)transistores de potencias bipolares' %}
+                  <input type="hidden" name="name" value="{{i[0]}}">
+                  {% endif %}
+                {% endfor %}
+            </li>
+            {% if session.user_id %}
+              <li class="list-group-item">
+                <div id="liveAlertPlaceholder"></div>
+                <button type="submit" class="btn btn-outline-secondary">comprar</button>
+              </li>
+            {% endif %}
+          </ul>
+        </form>
+		</div>
+	</div>
+</div>
+
+
+						</div>
+						
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="">
+				<img class="card-img-top" src="/static/image/jfet.jpeg" height="200rem" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title">(JFET)transistores de union de campo</h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-folder-open-o"></i>transistores/a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-calendar"></i>26 de decembre</a>
+		    	</li>
+		    </ul>
+        <form action="/comprar" method="POST">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <select name="producto" id="lang3">
+                <option value="" selected disabled>irfxx</option>
+                {% for i in name %}
+                  {% if i[0] == '(JFET)transistores de union de campo' %}
+                    <option value="{{i[1]}}">{{i[1]}}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+            </li>
+            <li class="list-group-item">
+              <p>precio:{{precio[10]}}</p>
+              <input type="hidden" name="precio" value="{{precio[10]}}">
+              {% for i in name %}
+                  {% if i[0] == '(JFET)transistores de union de campo' %}
+                    <input type="hidden" name="name" value="{{i[0]}}">
+                  {% endif %}
+                {% endfor %}
+            </li>
+            {% if session.user_id %}
+              <li class="list-group-item">
+                <div id="liveAlertPlaceholder"></div>
+                <button type="submit" class="btn btn-outline-secondary">comprar</button>
+              </li>
+            {% endif %}
+          </ul>
+        </form>
+		</div>
+	</div>
+</div>
+
+
+						</div>
+						
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="">
+				<img class="card-img-top" src="/static/image/mosfet.jpeg" height="200rem" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title">MOSFET de potencia</h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-folder-open-o"></i>MOSFET de potencia</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href=""><i class="fa fa-calendar"></i>26 de decembre</a>
+		    	</li>
+		    </ul>
+        <form action="/comprar" method="POST">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <select name="producto" id="lang4">
+                <option value="" selected disabled>irfxx</option>
+                {% for i in name %}
+                  {% if i[0] == 'MOSFET de potencia' %}
+                    <option value="{{i[1]}}">{{i[1]}}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+            </li>
+            <li class="list-group-item">
+              <p>precio:{{precio[11]}}</p>
+              <input type="hidden" name="precio" value="{{precio[11]}}">
+              {% for i in name %}
+                  {% if i[0] == 'MOSFET de potencia' %}
+                  <input type="hidden" name="name" value="{{i[0]}}">
+                  {% endif %}
+                {% endfor %}
+            </li>
+            {% if session.user_id %}
+              <li class="list-group-item">
+                <div id="liveAlertPlaceholder"></div>
+                <button type="submit" class="btn btn-outline-secondary">comprar</button>
+              </li>
+            {% endif %}
+          </ul>
+        </form>
+		</div>
+	</div>
+</div>
+</section>
+  
 <script src="/static/componentes.js"></script>
 {% endblock %}

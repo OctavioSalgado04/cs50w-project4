@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+{% block title %}perfil{% endblock %}
+{% block content %}
+
+<div id="listaFotos" class="info">
+  <div class="foto-item">
+    <img src="/static/image/1.jpeg" height="100rem">
+    <button type="button" class="btn btn-outline-primary" onclick="enviarURLFoto('/static/image/1.jpeg')">cambiar</button>
+  </div>
+  <div class="foto-item">
+    <img src="/static/image/2.jpeg" height="100rem">
+    <button type="button" class="btn btn-outline-primary" onclick="enviarURLFoto('/static/image/2.jpeg')">cambiar</button>
+  </div>
+  <div class="foto-item">
+    <img src="/static/image/3.jpeg" height="100rem">
+    <button type="button" class="btn btn-outline-primary" onclick="enviarURLFoto('/static/image/3.jpeg')">cambiar</button>
+  </div>
+</div>
+<script src="/static/cambios.js"></script>
+{% endblock %}

@@ -2,13 +2,50 @@
 {% block title %}perfil{% endblock %}
 {% block content %}
 <div class="info">
+  <div class="...">
     <h1>foto de perfil</h1>
     <img src="{{img}}" height="100rem">
-    <button type="submit" class="btn btn-outline-primary">cambiar</button>
-    <h1>nombre</h1>
-    <p>{{f}}</p> <button type="submit" class="btn btn-outline-primary">cambiar</button>
-    <h1>correo</h1>
-    <p>{correo}</p> <button type="submit" class="btn btn-outline-primary">cambiar</button>
+    <button type="submit" class="btn btn-outline-primary" onclick="window.location.href = '/fotos'">cambiar</button>
+    
+    <h1 id="nombre">Nombre</h1>
+    <p id="valorNombre">{{f}}</p>  
+    <button type="button" id="btnNombre" class="btn btn-outline-primary" onclick="mostrarCampo('nombre')">Cambiar</button>
+
+    <div id="campoNombre" style="display: none;">
+      <input type="text" id="nuevoNombre" placeholder="Ingrese un nuevo nombre">
+      <button type="button" class="btn btn-outline-primary" onclick="cambiarDato('nombre')">Guardar</button>
+    </div>
+
+    <h1 id="correo">Correo</h1>
+    <p id="valorCorreo">{{correo}}</p>
+    <button type="button" id="btnCorreo" class="btn btn-outline-primary" onclick="mostrarCampo('correo')">Cambiar</button>
+    
+    <div id="campoCorreo" style="display: none;">
+      <input type="text" id="nuevoCorreo" placeholder="Ingrese un nuevo correo">
+      <button type="button" class="btn btn-outline-primary" onclick="cambiarDato('correo')">Guardar</button>
+    </div>
+
+    <h1 id="direccion">direccion</h1>
+    <p id="valorDireccion">{{direccion}}</p>
+    <button type="button" id="btnDireccion" class="btn btn-outline-primary" onclick="mostrarCampo('direccion')">Cambiar</button>
+    
+    <div id="campoDireccion" style="display: none;">
+      <input type="text" id="nuevoDireccion" placeholder="Ingrese una nueva direccion">
+      <button type="button" class="btn btn-outline-primary" onclick="cambiarDato('direccion')">Guardar</button>
+    </div>
+      <h1 id="descripcion">descripcion</h1>
+      <p id="valorDescripcion">{{descripcion}}</p>
+      <button type="button" id="btnDescripcion" class="btn btn-outline-primary" onclick="mostrarCampo('descripcion')">Cambiar</button>
+    
+    <div id="campoDescripcion" style="display: none;">
+      <input type="text" id="nuevoDescripcion" placeholder="Ingrese una nueva descripcion">
+      <button type="button" class="btn btn-outline-primary" onclick="cambiarDato('descripcion')">Guardar</button>
+    </div>
+  </div>
+  <div>
+    <button type="button" class="button" id="btnGuardarCambios" onclick="guardarCambios()" style="display: none;">Guardar cambios</button>
+  </div>    
 </div>
 
+<script src="/static/cambios.js"></script>
 {% endblock %}
