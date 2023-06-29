@@ -1,51 +1,71 @@
 {% extends 'layout.html' %}
 {% block title %}perfil{% endblock %}
 {% block content %}
-<div class="info">
-  <div class="...">
-    <h1>foto de perfil</h1>
-    <img src="{{img}}" height="100rem">
-    <button type="submit" class="btn btn-outline-primary" onclick="window.location.href = '/fotos'">cambiar</button>
-    
-    <h1 id="nombre">Nombre</h1>
-    <p id="valorNombre">{{f}}</p>  
-    <button type="button" id="btnNombre" class="btn btn-outline-primary" onclick="mostrarCampo('nombre')">Cambiar</button>
 
-    <div id="campoNombre" style="display: none;">
-      <input type="text" id="nuevoNombre" placeholder="Ingrese un nuevo nombre">
-      <button type="button" class="btn btn-outline-primary" onclick="cambiarDato('nombre')">Guardar</button>
-    </div>
+<section class="dashboard section">
+	<!-- Container Start -->
+	<div class="container">
+		<!-- Row Start -->
+		<div class="row">
+			<div class="col-md-10 offset-md-1 col-lg-4 offset-lg-0">
+				<div class="sidebar">
+					<!-- User Widget -->
+					<div class="widget user-dashboard-profile">
+						<!-- User Image -->
+						<div class="profile-thumb">
+							<img src="{{img}}" alt="foto" class="rounded-circle">
+						</div>
+						<!-- User Name -->
+						<h5 class="text-center">{{f}}</h5>
+						<h5 class="text-center">{{correo}}</h5>
+            <p>{{descripcion}}</p>
+						<a href="/user-profile" class="btn btn-main-sm">Edit Profile</a>
+					</div>
+					<!-- Dashboard Links -->
+					<div class="widget user-dashboard-menu">
+						<ul>
+							<li class="active" ><a href=""><i class="fa fa-user"></i>historial</a></li>
+							<li><a href="/logout"><i class="fa fa-cog"></i> cerrar sesion</a></li>
+							<li><a href="/delete"><i class="fa fa-power-off"></i>eliminar tu cuenta permanentemente</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
+				<!-- Recently Favorited -->
+				<div class="widget dashboard-container my-adslist">
+					<h3 class="widget-header">Mi historial</h3>
+					<table class="table table-responsive product-dashboard-table">
+						<thead>
+							<tr>
+                <th>#</th>
+								<th>nombre del producto</th>
+                <th>precio</th>
+								<th class="text-center">categoria</th>
+								<th class="text-center">fecha</th>
+							</tr>
+						</thead>
+						<tbody>
+              {% for i in range(conteo) %}
+							<tr>
+                <td>{{i}}</td>
+								<td class="product-details">
+									<h3 class="title">{{nombre[i]}}</h3>
+								</td>
+								<td class="product-category"><span class="categories">C${{precio[i]}}</span></td>
+								<td class="product-details">{{categoria[i]}}</td>
+								<td class="product-details">{{fecha[i]}}</td>
+							</tr>
+              {% endfor %}
+						</tbody>
+					</table>
+					
+				</div>
+			</div>
+		</div>
+		<!-- Row End -->
+	</div>
+	<!-- Container End -->
+</section>
 
-    <h1 id="correo">Correo</h1>
-    <p id="valorCorreo">{{correo}}</p>
-    <button type="button" id="btnCorreo" class="btn btn-outline-primary" onclick="mostrarCampo('correo')">Cambiar</button>
-    
-    <div id="campoCorreo" style="display: none;">
-      <input type="text" id="nuevoCorreo" placeholder="Ingrese un nuevo correo">
-      <button type="button" class="btn btn-outline-primary" onclick="cambiarDato('correo')">Guardar</button>
-    </div>
-
-    <h1 id="direccion">direccion</h1>
-    <p id="valorDireccion">{{direccion}}</p>
-    <button type="button" id="btnDireccion" class="btn btn-outline-primary" onclick="mostrarCampo('direccion')">Cambiar</button>
-    
-    <div id="campoDireccion" style="display: none;">
-      <input type="text" id="nuevoDireccion" placeholder="Ingrese una nueva direccion">
-      <button type="button" class="btn btn-outline-primary" onclick="cambiarDato('direccion')">Guardar</button>
-    </div>
-      <h1 id="descripcion">descripcion</h1>
-      <p id="valorDescripcion">{{descripcion}}</p>
-      <button type="button" id="btnDescripcion" class="btn btn-outline-primary" onclick="mostrarCampo('descripcion')">Cambiar</button>
-    
-    <div id="campoDescripcion" style="display: none;">
-      <input type="text" id="nuevoDescripcion" placeholder="Ingrese una nueva descripcion">
-      <button type="button" class="btn btn-outline-primary" onclick="cambiarDato('descripcion')">Guardar</button>
-    </div>
-  </div>
-  <div>
-    <button type="button" class="button" id="btnGuardarCambios" onclick="guardarCambios()" style="display: none;">Guardar cambios</button>
-  </div>    
-</div>
-
-<script src="/static/cambios.js"></script>
 {% endblock %}

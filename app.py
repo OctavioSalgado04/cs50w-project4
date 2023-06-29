@@ -32,7 +32,10 @@ def validar_correo(correo):
 
 @app.route("/")
 def index():
-    
+    simon=session['img']
+    dato = text("UPDATE informacion_personal SET url=:nuevo WHERE id = :id")
+    db.execute(dato, {"nuevo": simon, "id": session["user_id"]})
+    db.commit()
     return render_template("index.html")
 
 @app.route('/login', methods = ['GET', 'POST'])
@@ -129,6 +132,24 @@ def logout():
     session.clear()
     return redirect("/login")
 
+@app.route("/delete")
+def delete():
+    id=session["user_id"]
+    
+    dele=text("DELETE FROM usuario WHERE id=:id")
+    db.execute(dele, {"id":id})
+    delet=text("DELETE FROM venta WHERE id_user=:id")
+    db.execute(delet, {"id":id})
+    delete=text("DELETE FROM informacion_personal WHERE id_user=:id")
+    db.execute(delete, {"id":id})
+    deleta=text("DELETE FROM detalle_venta WHERE id_user=:id")
+    db.execute(deleta, {"id":id})
+    delets=text("DELETE FROM historial WHERE id_usario=:id")
+    db.execute(delets, {"id":id})
+    db.commit()
+    session.clear()
+    return redirect("/login")
+
 @app.route("/perfil")
 @login_required
 def perfil():
@@ -137,55 +158,149 @@ def perfil():
 
     dato1= text("SELECT * from informacion_personal where id_user=:id")
     info= db.execute(dato1, {"id":session["user_id"]}).fetchone()
-    print(info)
-    return render_template("perfil.html", f=info[2], img=info[4], correo=correo[0], direccion=info[3], descripcion=info[5])
-
-@app.route("/fotos")
-@login_required
-def nueva_foto():
-
-    return render_template("fotos.html")
-
-@app.route("/guardar_cambios", methods=['POST'])
-def guardar_cambios():
-    datos = request.get_json()
-    print(datos)
-    url = datos.get('urlFoto')
-    nombre = datos.get('nombre')
-    correo = datos.get('correo')
-    direccion = datos.get('direccion')
-    descripcion = datos.get('descripcion')
+    print(info[2])
     
-    if nombre:
-        print("el nombre")
-        nuevo_nombre= text ("UPDATE informacion_personal SET usuario=:nuevo WHERE id = :id")
-        db.execute(nuevo_nombre, { "nuevo": nombre,"id": session["user_id"]})
-        session["usuario"]=nombre
-    if correo:
-        print("el correo")
-        nuevo_correo= text ("UPDATE usuario SET correo=:nuevo WHERE id_user= :id")
-        db.execute(nuevo_correo, {"nuevo": correo,"id": session["user_id"]})
-    if direccion:
-        print("la direccion")
-        nuevo_direccion= text ("UPDATE informacion_personal SET direccion=:nuevo WHERE id_user= :id")
-        db.execute(nuevo_direccion, { "nuevo": direccion,"id": session["user_id"]})
-    if descripcion:
-        print("la descripcion")
-        nuevo_descripcion= text ("UPDATE informacion_personal SET descripcion=:nuevo WHERE id_user= :id")
-        db.execute(nuevo_descripcion, { "nuevo": descripcion,"id": session["user_id"]})
-    if url:
-        print("la foto")
-        session["img"]=url
-        nueva_foto= text ("UPDATE informacion_personal SET url=:nuevo WHERE id_user= :id")
-        db.execute(nueva_foto, { "nuevo": url,"id": session["user_id"]})
+    a = text("SELECT * FROM historial WHERE id_usuario=:id")
+    carrito = db.execute(a, {"id": str(session["user_id"])}).fetchall()
+
+    producto=[]
+    fecha=[]
+    cantidad=[]
+    fecha=[]
+    precio=[]
+    for i in carrito:
+        print(i[1])
+        why=text("SELECT * from detalle_venta WHERE id_venta = :id")
+        produ=db.execute(why,{"id":i[1]}).fetchone()
+        producto.append(produ[1])
+        cantidad.append(produ[3])
+        precio.append(produ[4])
+        fecha.append(i[3])
         
+    nombre=[]
+    categoria=[]
+    for i in producto:
+        print(i)
+        why=text("SELECT nombre, categoria from producto WHERE id = :id")
+        nombe=db.execute(why,{"id":i}).fetchone()
+        nombre.append(nombe[0])
+        categoria.append(nombe[1])
+
+    conteo = len(producto)
+
+    return render_template("perfil.html", f=session['usuario'], img=session['img'], correo=correo[0], descripcion=info[5], nombre=nombre, conteo=conteo, precio=precio, fecha=fecha, categoria=categoria)
+
+@app.route("/user-profile")
+@login_required
+def user_profile():
+
+    dato1= text("SELECT * from informacion_personal where id_user=:id")
+    info= db.execute(dato1, {"id":session["user_id"]}).fetchone()
+    print(info[2])
+    return render_template("usuario-perfil.html",f=info[2], img=info[4],  direccion=info[3], descripcion=info[5])
+
+@app.route("/contraseña")
+@login_required
+def contraseña():
+
+    return render_template("user-profile.html")
+
+@app.route("/guardar_cambios", methods=['POST', "GET"])
+def guardar_cambios():
+    if request.method == "POST":
+        correo = request.form.get('correo')
+        confirmar = request.form.get('nuevo_correo')
+
+        dato1=text("SELECT correo FROM usuario where id=:id")
+        simon=db.execute(dato1, {"id": session["user_id"]}).fetchone()
+
+        if simon != correo:
+            flash('los correos no coinciden')
+            return rennder_template("usuario-perfil.html")
+        
+        if correo and confirmar:
+            print("el correo")
+            nuevo_correo= text ("UPDATE usuario SET correo=:nuevo WHERE id_user= :id")
+            db.execute(nuevo_correo, {"nuevo": confirmar,"id": session["user_id"]})
+            db.commit()
+        else:
+            flash('No se ha ingresado ningún correo')
+            return rennder_template("usuario-perfil.html")
+        
+        # Aquí puedes realizar las operaciones necesarias con los datos actualizados
+        flash('Cambios guardados')
+        return render_template("usuario-perfil.hmtl")
     else:
         return redirect("/")
-    db.commit()
 
-    # Aquí puedes realizar las operaciones necesarias con los datos actualizados
-    flash('Cambios guardados')
-    return redirect("/")
+@app.route("/direccion", methods=['GET', 'POST'])
+def direccion():
+    if request.method == "POST":
+        direccion = request.form.get('direccion')
+        descripcion = datos.get('descripcion')
+        if direccion:
+                print("la direccion")
+                nuevo_direccion= text ("UPDATE informacion_personal SET direccion=:nuevo WHERE id_user= :id")
+                db.execute(nuevo_direccion, { "nuevo": direccion,"id": session["user_id"]})
+        else:
+            flash('No se ha ingresado ninguna direccion')
+            return rennder_template("usuario-perfil.html")
+        if descripcion:
+            print("la descripcion")
+            nuevo_descripcion= text ("UPDATE informacion_personal SET descripcion=:nuevo WHERE id_user= :id")
+            db.execute(nuevo_descripcion, { "nuevo": descripcion,"id": session["user_id"]})
+
+        db.commit()
+        flash('Cambios guardados')
+        return render_template("usuario-perfil.html")
+    else:
+        return redirect("/")
+
+@app.route('/upload', methods=['POST', "get"])
+def upload():
+    if request.method == "POST":
+        # Verificar si se envió un archivo
+
+        foto = request.files['foto']
+        nuevo_nombre = request.form.get('nombre')
+
+        if not foto:
+            flash('No se ha enviado ningún archivo')
+            return render_template("usuario-perfil.html")
+
+        if not nuevo_nombre:
+            flash('No se ha ingresado ningún nombre')
+            return rennder_template("usuario-perfil.html")
+        else:
+
+            dato1 = text("UPDATE informacion_personal SET usuario=:nuevo WHERE id = :id")
+            db.execute(dato1, {"nuevo": nuevo_nombre, "id": session["user_id"]})
+
+            nuevo_nombre2 = text("UPDATE usuario SET name=:nuevo WHERE id = :id")
+            db.execute(nuevo_nombre2, {"nuevo": nuevo_nombre, "id": session["user_id"]})
+            
+            db.commit()
+            session["usuario"]=nuevo_nombre
+        # Verificar si el archivo tiene un nombre
+        if foto.filename == '':
+            flash('El archivo no tiene un nombre válido')
+            return rennder_template("usuario-perfil.html")
+
+        # Guardar el archivo en el servidor
+        ruta_guardada = os.path.join('static/image/perfiles', foto.filename)
+        foto.save(ruta_guardada)
+
+        dato = text("UPDATE informacion_personal SET url=:nuevo WHERE id = :id")
+        db.execute(dato, {"nuevo": ruta_guardada, "id": session["user_id"]})
+        db.commit()
+        session['img'] = ruta_guardada
+        print(session['img'])
+        flash('La foto se ha guardado exitosamente')
+        return render_template("usuario-perfil.html")
+    
+    else:
+        return redirect("/")
+
 
 @app.route("/componentes")
 def componentes():
@@ -449,6 +564,10 @@ def venta():
                         {"id_producto":int(carrito[i][1]), "id_venta":id_venta[0], "cantidad":int(carrito[i][3]), "precio_unitario":carrito[i][2], "monto_total":monto_total})
             db.commit()
 
+            datoi=text("INSERT INTO historial (id_venta, id_venta, id_usuario, fecha_historial) VALUES (:id_venta, :id_usuario, :fecha_historial)")
+            db.execute(datoi,
+                        {"id_venta":id_venta[0], ":id_usuario":session["user_id"], "fecha_historial":fecha_venta})
+
         impuestos="5%"
         monto=[]
         nombre=[]
@@ -467,6 +586,7 @@ def venta():
         fecha=db.execute(f,{"id":session["user_id"]}).fetchall()
 
         nosi=sum(t0tal)
+
 
         return render_template("venta.html", conteo=conteo, producto=nombre, subtotal=monto, impuesto=impuestos, fecha_venta=fecha, descuento=descuento,total=t0tal, nosi=nosi)
     else:
@@ -506,15 +626,3 @@ def procesar_pago():
 
     return f"Pago recibido. Tarjeta: {numero_tarjeta}, Nombre: {nombre_tarjeta}"
 
-
-@app.route("/historial")
-def historial():
-    producto=''
-    dato1=text("SELECT FROM id_venta FROM detalle_venta WHERE id_producto=:producto ")
-    id_venta=db.execute(dato1,
-                        {"producto":producto}).fetchone()
-    id_usurio=session["user_id"]
-    fecha= hora
-    dato1=text("INSERT INTO historial (id_venta, id_venta, id_usuario, fecha_historial) VALUES (:id_venta, :id_usuario, :fecha_historial)")
-    db.execute(dato1,
-                {"id_venta":id_venta, ":id_usuario":id_usuario, "fecha_historial":fecha})
